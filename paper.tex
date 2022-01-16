@@ -1,0 +1,131 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Scala,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+
+
+    \begin{document}
+
+\title{Mutating Algorithm on Immutable Data}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Nassouh Al-Olabi}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+Damascus, Syria \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{2\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+}
+
+\maketitle
+
+
+
+\begin{abstract}
+    Often times engineers roll out functional programming in favor of an Object Oriented - Imperative style because of immutability due to inefficiency especially when their model is relatively large and in place mutations seem like the only efficient way to model changes or when implementing standard algorithms with in place mutations.
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+immutable data structures, functional programming, algorithm design
+\end{IEEEkeywords}
+
+\section{Introduction}
+In the ever growing field of computer science, and complex system design we find ourselves constantly devising new strategies for writing down a simple elegant solution, model - representation for our complex problems.
+At first during the low level C, Fortran days we'd write down naked data structs and write down procedures for processing them.
+then came the age of OO were we'd abstract and encapsulate data and it's behavior into Objects which served as both an api to interface with the data and a type for it and a namespace for methods that implicitly take this object as a parameter.
+this methodology has dominated the industry for over 40 years which is too long for any solution in this industry.
+The increasing need for distributed, stateless, fault-tolerant, concurrent, datacentric systems makes OO/imperative solutions harder to obtain and reason about.
+
+\section{Methods}
+
+\subsection{Shadowing}
+
+Shadowing is a technique that could represent a changing variable. for instance, an accumulator. the technique is simple and possible in almost every programming language out there.
+at it's simplest form shadowing looks like this:
+\begin{lstlisting}
+    // Scala  
+    object Main {
+        def main(args: Array[String]){
+            val i = 1;
+            {
+                val i = 2;
+                {
+                    val i = 3;
+                }
+            }
+        }  
+    }    
+\end{lstlisting}
+But that's not really useful and even more confusing and very error prone and I'd agree shadowing in of it's self isn't really useful but it's really at the core of any recursive solution since every function come with it's own scope and 
+\begin{lstlisting} 
+    def factorial (n: BigDecimal):BigDecimal = {
+        if (n <= 1)  1
+        else n * factorial(n-1)
+    }
+\end{lstlisting}
+Notice here n value range over \{n, ... , 1\} but it's not really changing each n deffer from the other and has it's own scope
+if you run this code it'll only go so far (around  n = 9613 for this example) until you get a StackOverflowError... not good.
+
+\subsection{Tail Recursion}
+Tail recursion is when you simply return the value of a function call at the end (tail) of your function, in other words your functions has done it's job and handing over the rest of the work to another function
+\begin{lstlisting}
+  def factorial (n: BigDecimal):BigDecimal = {
+    def helper(n: BigDecimal, Acc: BigDecimal): BigDecimal = {
+      if (n <= 1) Acc
+      else helper(n - 1, n * Acc)
+    }
+    helper(n, 1)
+  }
+\end{lstlisting}
+Notice that as n takes the values \{n, n-1, n-2, ...\}
+the accumulator also changes \{n, n*(n-1), n*(n-1)*(n-2), ...\}
+which is very similar to a for loop accumulator pattern, so similar that sometimes compilers compile it to an actual loop
+
+%TODO: use these links:
+%TODO: http://typeocaml.com/2015/01/02/immutable/
+%TODO: https://algs4.cs.princeton.edu/23quicksort/
+%TODO: https://coderscat.com/quicksort-history-and-impls/
+%TODO: https://www.codingninjas.com/blog/2020/09/26/mutating-non-mutating-algorithms-in-c/
+%TODO: https://elm-lang.org/news/blazing-fast-html
+%TODO: https://discourse.elm-lang.org/t/can-the-compiler-skip-virtual-dom/6300
+%TODO: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3136027/
+%TODO: 
+
+
+\end{document}

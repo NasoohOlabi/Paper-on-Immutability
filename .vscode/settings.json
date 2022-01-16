@@ -1,0 +1,8 @@
+{
+    "cSpell.words": [
+        "datacentric"
+    ],
+    "files.watcherExclude": {
+        "**/target": true
+    }
+}
