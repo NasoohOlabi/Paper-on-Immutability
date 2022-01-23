@@ -14,22 +14,40 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\lstset{frame=tb,
-  language=Scala,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true,
-  tabsize=3
-}
+\lstdefinestyle{scala}{frame=tb,
+language=Scala,
+aboveskip=3mm,
+belowskip=3mm,
+showstringspaces=false,
+columns=flexible,
+basicstyle={\small\ttfamily},
+numbers=none,
+numberstyle=\tiny\color{gray},
+keywordstyle=\color{blue},
+commentstyle=\color{dkgreen},
+stringstyle=\color{mauve},
+breaklines=true,
+breakatwhitespace=true,
+tabsize=3}
+
+\lstdefinestyle{cpp}{frame=tb,
+language=C++,
+aboveskip=3mm,
+belowskip=3mm,
+showstringspaces=false,
+columns=flexible,
+basicstyle={\small\ttfamily},
+numbers=none,
+numberstyle=\tiny\color{gray},
+keywordstyle=\color{blue},
+commentstyle=\color{dkgreen},
+stringstyle=\color{mauve},
+breaklines=true,
+breakatwhitespace=true,
+tabsize=3}
+
+\lstset{style=scala}
+
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
@@ -39,10 +57,10 @@
 
 \title{Mutating Algorithm on Immutable Data}
 
-\author{\IEEEauthorblockN{1\textsuperscript{st} Nassouh Al-Olabi}
+\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
 \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
 \textit{name of organization (of Aff.)}\\
-Damascus, Syria \\
+City, Country \\
 email address or ORCID}
 \and
 \IEEEauthorblockN{2\textsuperscript{th} Given Name Surname}
@@ -57,7 +75,7 @@ email address or ORCID}
 
 
 \begin{abstract}
-    Often times engineers roll out functional programming in favor of an Object Oriented - Imperative style because of immutability due to inefficiency especially when their model is relatively large and in place mutations seem like the only efficient way to model changes or when implementing standard algorithms with in place mutations.
+    Recent growing demand for fault-tolerant, scalable, distributed systems has made some mainstream software architectures and patterns obsolete or rather harder to come by and thus came the rise of stateless and functional solutions based on data immutability which has been the cornerstone of "Big Data"
 
 \end{abstract}
 
@@ -67,10 +85,12 @@ immutable data structures, functional programming, algorithm design
 
 \section{Introduction}
 In the ever growing field of computer science, and complex system design we find ourselves constantly devising new strategies for writing down a simple elegant solution, model - representation for our complex problems.
-At first during the low level C, Fortran days we'd write down naked data structs and write down procedures for processing them.
+At first during the low level C, Fortran days we'd write down programs in a procedural way explicitly telling the computer what to do in each step.
 then came the age of OO were we'd abstract and encapsulate data and it's behavior into Objects which served as both an api to interface with the data and a type for it and a namespace for methods that implicitly take this object as a parameter.
 this methodology has dominated the industry for over 40 years which is too long for any solution in this industry.
-The increasing need for distributed, stateless, fault-tolerant, concurrent, datacentric systems makes OO/imperative solutions harder to obtain and reason about.
+The increasing need for distributed, stateless, fault-tolerant, concurrent, datacentric systems makes OO/imperative solutions harder to obtain and reason about. and here is where FP (functional programming ) fits in.
+contrary to what you might think it's not the new kid on the block FP is as old as the first computers with lambda calculus as it's foundation FP learns a lot from it's mathematical roots in many aspects mainly with it being declarative and strict which allows for building outstanding compilers to understand it's concise declarative expressions. but in the old day computers couldn't afford the luxury of immutable data structures and so in place mutations encapsulated within a class was the most reasonable way to go about doing things.
+these days memory is so cheep you can always afford to store the value and a reference to it and it's hash and a couple of almost identical copies
 
 \section{Methods}
 
@@ -117,6 +137,63 @@ Notice that as n takes the values \{n, n-1, n-2, ...\}
 the accumulator also changes \{n, n*(n-1), n*(n-1)*(n-2), ...\}
 which is very similar to a for loop accumulator pattern, so similar that sometimes compilers compile it to an actual loop
 
+
+\subsection{Pure Functions}
+Pure Functions when implemented correctly serves as a (possibly infinite) lookup table mapping from one type to another since variable $x$ will always be the same $f(x)$ will too. this is what's known as referential transparency.
+\lstset{style=cpp}
+\begin{lstlisting}
+    #include <functional>
+    #include <iostream>
+    int sum(const int v[], const int& n) {
+        std::function<int(int, int)> helper = [&v, &n, &helper](int index, int Acc) {
+            if (index >= n) return Acc;
+            return helper(index + 1, Acc + v[index]);
+        };
+        return helper(0, 0);
+    }
+    int main(int, char**) {
+        const int a[] = {1, 2, 3, 4, 5, 6};
+        // a[1] = 3; not allowed
+        int total = sum(a, 6); // 21
+        someFunction(a);
+        otherFunction(a);
+        if (total == sum(a,6))
+            std::cout<<"It should be equal same function same argument?!";
+        return 0;
+    }
+\end{lstlisting}
+generally speaking $"someFunction"$ and $"otherFunction"$ could've done al sorts of things with $a$ (changing an element value, adding more elements, removing some elements, delete the pointer entirely ...) but if they were pure functions or like in this case using a some sort of a language guarantee (here it's $const$) $a$ will not be modified and in turns $total == sum(a,6)$ and overall our program would be easier to reason about.
+
+\subsection{Laziness}
+Now that we know pure function we can take a look a one of their results. it's the idea that "if data won't change and functions won't neither so would results" meaning that we wouldn't perfome any operations unless they're absolutely necessary 
+\lstset{style=scala}
+\begin{lstlisting}
+    def from(n: Int): LazyList[Int] = 
+        n #:: from(n+1)
+    def sieve (s: LazyList[Int]): LazyList[Int] = 
+        s.head #:: sieve(s.tail.filter(_ % s.head != 0))
+    val primes = sieve(from(2))
+
+    primes
+        .take(10)
+        .toList // now it's necessary
+
+\end{lstlisting}
+this behavior is implemented in some languages is what's known as Function0 that is "a function without parameters" but this would be somewhat expensive since you have to pack (copy) the closure of the function with it to achieve predictable behavior contrary to just keeping references. but if the data is immutable it would make sense to only pack references this is what's refereed to as laziness 
+
+reassignment vs mutation
+
+log logfilesystem
+
+COWs and structural sharing
+
+MVC
+
+elm and editor examples
+
+
+
+%TODO: talk about referential transparency
 %TODO: use these links:
 %TODO: http://typeocaml.com/2015/01/02/immutable/
 %TODO: https://algs4.cs.princeton.edu/23quicksort/
