@@ -55,7 +55,7 @@ tabsize=3}
 
     \begin{document}
 
-\title{Mutating Algorithm on Immutable Data}
+\title{Immutability for Better State Management}
 
 \author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
 \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
@@ -75,7 +75,7 @@ email address or ORCID}
 
 
 \begin{abstract}
-    Recent growing demand for fault-tolerant, scalable, distributed systems has made some mainstream software architectures and patterns obsolete or rather harder to come by and thus came the rise of stateless and functional solutions based on data immutability which has been the cornerstone of "Big Data"
+    Recent growing demand for fault-tolerant, scalable, distributed systems has made some mainstream software architectures and patterns obsolete or rather harder to come by, and thus came the rise of stateless and functional solutions based on data immutability which has already been the cornerstone of "Big Data"
 
 \end{abstract}
 
@@ -122,6 +122,27 @@ But that's not really useful and even more confusing and very error prone and I'
 Notice here n value range over \{n, ... , 1\} but it's not really changing each n deffer from the other and has it's own scope
 if you run this code it'll only go so far (around  n = 9613 for this example) until you get a StackOverflowError... not good.
 
+\subsection{Reassignment}
+TODO: choose which one
+
+TODO: Paper definition:
+there's a subtle difference, well
+hidden behind the overloaded use of the symbol
+‘=’, that really sets the two apart. In the imperative
+program, ‘=’ refers to a destructive update, assigning
+a new value to the left-hand-side variable,
+whereas in the functional program ‘=’ means true
+equality, and that both the left-hand-side and the right-hand-side can be used interchangeably. This characteristic
+of functional programming (known as referential
+transparency or purity) has a profound influence
+on the way programs are constructed and reasoned
+about.
+
+TODO: My definition:
+before we move on it's important to do the distinction between mutation and Reassignment. simply put when you mutate data the old version of it would become unusable and simple would cease to exist. On the other hand updating a variable should keep the old version usable. a perfect example of this is a VCS (version control system) it gives you the feeling that you are mutating files while in fact it's storing changes (updates) and updating a "HEAD" value to represent the last change (update)
+
+
+
 \subsection{Tail Recursion}
 Tail recursion is when you simply return the value of a function call at the end (tail) of your function, in other words your functions has done it's job and handing over the rest of the work to another function
 \begin{lstlisting}
@@ -165,13 +186,15 @@ Pure Functions when implemented correctly serves as a (possibly infinite) lookup
 generally speaking $"someFunction"$ and $"otherFunction"$ could've done al sorts of things with $a$ (changing an element value, adding more elements, removing some elements, delete the pointer entirely ...) but if they were pure functions or like in this case using a some sort of a language guarantee (here it's $const$) $a$ will not be modified and in turns $total == sum(a,6)$ and overall our program would be easier to reason about.
 
 \subsection{Laziness}
-Now that we know pure function we can take a look a one of their results. it's the idea that "if data won't change and functions won't neither so would results" meaning that we wouldn't perfome any operations unless they're absolutely necessary 
+sometimes refered to as call-by-need, it's the notion that "if data won't change and functions won't neither so would results" meaning that we wouldn't perfome any operations unless they're absolutely necessary 
 \lstset{style=scala}
 \begin{lstlisting}
     def from(n: Int): LazyList[Int] = 
-        n #:: from(n+1)
+        n #:: from(n+1) 
+        // here from(n+1) won't be evaluated
     def sieve (s: LazyList[Int]): LazyList[Int] = 
-        s.head #:: sieve(s.tail.filter(_ % s.head != 0))
+        s.head #:: sieve(s.tail.filter(_ % s.head != 0)) 
+    // nor would sieve(s.tail.filter(_ % s.head != 0))
     val primes = sieve(from(2))
 
     primes
@@ -181,15 +204,21 @@ Now that we know pure function we can take a look a one of their results. it's t
 \end{lstlisting}
 this behavior is implemented in some languages is what's known as Function0 that is "a function without parameters" but this would be somewhat expensive since you have to pack (copy) the closure of the function with it to achieve predictable behavior contrary to just keeping references. but if the data is immutable it would make sense to only pack references this is what's refereed to as laziness 
 
-reassignment vs mutation
 
-log logfilesystem
-
-COWs and structural sharing
-
-MVC
-
-elm and editor examples
+\subsection{logfilesystem}
+sth
+\subsection{Append Logs}
+sth
+\subsection{Copy-On-Write}
+sth
+\subsection{Structural Sharing}
+sth
+\subsection{MVC}
+sth
+\subsection{elm}
+sth
+\subsection{Cpp example}
+$https://www.youtube.com/watch?v=y_m0ce1rzRI\&t=4081s$
 
 
 
