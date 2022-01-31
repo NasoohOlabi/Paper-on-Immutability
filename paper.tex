@@ -90,9 +90,108 @@ Then when state got too big following the Object Oriented paradigm we'd abstract
 this methodology has dominated the industry for over 40 years which is too long for any solution in this industry.
 The increasing need for distributed, stateless, fault-tolerant, concurrent, datacentric systems makes solutions based on these old methodologies harder to obtain and reason about. and here is where Immutability and Functional Programming fits in.
 contrary to what you might think it's not the new kid on the block FP is as old as the first computers with lambda calculus as it's foundation FP learns a lot from it's mathematical roots in many aspects mainly with it being declarative which allows for building outstanding compilers to understand it's concise declarative expressions. but in the old day computers couldn't afford the luxury of immutable data structures. Thus in place mutations encapsulated within an Object was the most reasonable way to go about doing things.\newline
-These days memory is so cheep you can always afford to store snapshots and create new structures along the way.
+These days memory is so cheep you can always afford to store snapshots and create new structures along the way. 
+even though this is rarely the case since using the proper data structures and a deep understanding of the immutability constraints and it's implications which aren't only visible to programmers but also systems administrators data base managers files system distributed infrastructures
 
 \section{Methods}
+
+
+\subsection{Immutability Properties}
+% src
+% Immutability an Empirical Study in Scala.pdf
+When something is immutable, we say that it cannot be changed or that it is unchangeable. The definition
+of an immutable object in an object-oriented programming language is an object that has a state
+that cannot be mutated once instantiated (created). Moreover, an immutable class is a class whose instances
+cannot be mutated, meaning that there are no methods in the class that can mutate an instance
+of it. Classes that are not immutable can, however, have instances of it that are immutable. 
+
+The concept of immutability is important and
+utilizing immutable data is considered to ease software development and reasoning about programs in
+numerous ways, for example:
+
+\textbf{1. Predictability} It is harder to understand and reason about programs that have shared mutable
+states with unclear interactions. Tracking mutations and maintaining the correct state of a program
+can be difficult. Using immutable data naturally, avoids state changes and forces the programmer
+to let data flow and be utilized in a different way throughout the program, making the state of the
+program more predictable. For example, calling the same function twice would yield the same result,
+and the outcome is predictable. Without the immutability guarantee, the second call could
+yield another result because of an underlying state mutation making it less predictable.
+
+\textbf{2. Testability} Because immutable data can only be changed once during construction, they are inherently
+simpler and easier to unit test. One may reason that by restricting the number of possible mutations
+in a program; the number of potential errors of the program is also reduced. Testing is essentially
+to validate that mutations in the program occur correctly and thus having more mutations would require more testing. By restricting the number of mutations in a program, the program has
+fewer reasons for errors to occur and there are fewer state transitions to test.
+
+\textbf{3. Concurrency} Immutable data are thread-safe, as data cannot mutate, there is no danger in having
+multiple threads access the same data at the same time and have synchronization issues.
+
+\textbf{4. Modularity} Without depending on a local or global state, immutable types and data may be reused
+in different contexts more easily.
+
+There are different varieties of immutability used in practice today, which includes:\newline
+\textbf{Object immutability}
+
+An immutable object is an object that cannot be modified (mutated), i.e., its state cannot be mutated.\newline
+\textbf{Class immutability}
+
+When every instantiated object of a class is immutable, then we say that the class itself is immutable.\newline
+\textbf{Deep and shallow immutability (transitivity)}
+
+ Immutability can be deep or shallow, i.e., transitive or non-transitive:
+
+ • \textbf{Deep (transitive)}
+
+immutability means that all objects referred to by an immutable object must also be immutable.
+
+• \textbf{Shallow (non-transitive)}
+
+immutability has a more relaxed constraint, and the immutable object may refer to objects that are mutable, but the fields of the immutable object itself cannot be mutated.\newline
+\textbf{Reference immutability (read-only references)}
+
+Languages with the support of reference immutability have the notion of read-only references. A readonly
+reference cannot mutate the object it is referring to. When all references to an object are readonly,
+then nothing can mutate the object, and the object is immutable. There are, however, often no
+guarantee that a referred to object is immutable because the object may still be mutated by some other
+reference that is not read-only, unless there is some analysis that ensures that there only exist readyonly
+references to that object. Reference immutability thus often ensure shallow (non-transitive)
+immutability and “reference immutability” does not mean that a reference itself is immutable.\newline
+\textbf{Non-assignability}
+
+Non-assignability is a form of immutability and property of a variable that makes sure that it cannot
+be reassigned. Since fields of objects are variables and if no variable can be reassigned after its initial
+assignment, the object is effectively immutable if what the fields are referring to is immutable. This
+make non-assignability give shallow (non-transitive) immutability too. Assignment of an object’s field
+mutates the object, but it does not mutate what was previously on the field or what was assigned to the
+field.\newline
+\textbf{Concrete and abstract immutability}
+
+Concrete immutability does not allow any change to the object’s state. Abstract immutability, however,
+allows an immutable object to change its internal state but not the object’s “abstract” value. The object
+is still immutable from the perspective of the object’s observer that can only see the abstract value, but
+the object may mutate internally. This can, for example, be useful to speed up certain operations, lazy
+initialization and buffering.
+
+
+The immutability properties are:
+Mutable: We give a template the mutable property if an instance of that template can be mutated
+directly or indirectly.
+Shallow immutable: A template has the shallow (non-transitive) immutable property if the template
+does not have fields that can be reassigned, but has references to other objects that may be
+mutated (are shallow immutable or mutable).
+Deeply immutable: A template is deeply (transitive) immutable if all instances of that template
+cannot be mutated after initialization.
+Conditionally deeply immutable: The conditionally deeply immutable property is given to a
+template that is deeply immutable but depends on some other potentially mutable type. An example
+of this is a generic collection that can store different types, and the collection itself is declared
+in a way so that it cannot be mutated, but the type that is used with the collection may be shallow
+immutable or mutable (an example of this is shown in listing 9).
+CHAPTER 4. METHODOLOGY 25
+As we have discovered in previous chapters, there are different types and properties of immutability.
+One immutability property not considered by our analysis is the notion of abstract immutability [3].
+The reasoning behind it is that abstract immutability is not simple enough, and to compute abstract immutability
+one would have to deal with a class’s internal state which could be set up in a multitude of
+different ways and track state changes [18].
 
 \subsection{Shadowing}
 
@@ -202,7 +301,9 @@ sometimes referred to as call-by-need, it's the notion that "if data won't chang
         .toList // now it's necessary
 
 \end{lstlisting}
-this behavior is implemented in some languages is what's known as Function0 that is "a function without parameters" but this would be somewhat expensive since you have to pack (copy) the closure of the function with it to achieve predictable behavior contrary to just keeping references. but if the data is immutable it would make sense to only pack references this is what's referred to as laziness 
+this behavior is implemented in some languages is what's known as Function0 that is "a function without parameters" but this would be somewhat expensive since you have to pack (copy) the closure
+%TODO: explain what a closure is ...
+of the function with it to achieve predictable behavior contrary to just keeping references. but if the data is immutable it would make sense to only pack references this is what's referred to as laziness 
 
 
 \subsection{logfilesystem}
@@ -212,15 +313,15 @@ sth
 \subsection{Copy-On-Write}
 sth
 \subsection{Structural Sharing}
-sth
+effecient cow reduce the overhead of threading and parallel processing
 \subsection{MVC}
 sth
 \subsection{elm}
 sth
 \subsection{Cpp example}
 $https://www.youtube.com/watch?v=y_m0ce1rzRI\&t=4081s$
-
-
+\section*{References}
+[1] 
 
 %TODO: talk about referential transparency
 %TODO: use these links:
@@ -231,27 +332,31 @@ $https://www.youtube.com/watch?v=y_m0ce1rzRI\&t=4081s$
 %TODO: https://elm-lang.org/news/blazing-fast-html
 %TODO: https://discourse.elm-lang.org/t/can-the-compiler-skip-virtual-dom/6300
 %TODO: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3136027/
+%TODO: https://en.wikipedia.org/wiki/Persistent_data_structure#Garbage_collection
+%TODO: https://en.wikipedia.org/wiki/Funarg_problem
+%TODO: https://blog.sigplan.org/2022/01/13/provably-space-efficient-parallel-functional-programming/
+%TODO: https://en.wikipedia.org/wiki/Persistent_data_structure#Garbage_collection
 %TODO: StateManegment
-prefered data structures
-dum data classes
-following strong type system
-funcional
-contexts static compiletime
-curring dynamic clojures
-compile optimizations
-lazyness
-transperncy substitiustion model
-GC or static refs
+% prefered data structures
+% dum data classes
+% following strong type system
+% funcional
+% contexts static compiletime
+% curring dynamic clojures
+% compile optimizations
+% lazyness
+% transperncy substitiustion model
+% GC or static refs
 
-chanllenging
-modularity
+% chanllenging
+% modularity
 
-bref on 
-determenistic concurrency
-reactiveity
-modernday statless deployment
-	docker or distributed or actor
-	strong endpoint devices
+% bref on 
+% determenistic concurrency
+% reactiveity
+% modernday statless deployment
+% 	docker or distributed or actor
+% 	strong endpoint devices
 
 
 \end{document}
