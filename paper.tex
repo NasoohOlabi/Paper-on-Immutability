@@ -84,19 +84,6 @@ immutable data structures, functional programming, algorithm design
 \end{IEEEkeywords}
 
 \section{Introduction}
-In the ever growing field of computer science, and complex system design we find ourselves constantly devising new strategies for writing down a simple elegant solution, model, representation for our complex problems.
-At first during the low level C, Fortran days - back when memory was expensive and scarce - we'd write down programs in a procedural way explicitly telling the computer what to do in each step and modifying data in place since we didn't afford to keep snapshots (copies, clones ...). \newline
-Then when state got too big following the Object Oriented paradigm we'd abstract and encapsulate both data and meta-data along with their behavior into Objects which served as both an api to interface with the data and maybe modify it in place and a type for it to reason about it and a namespace for methods that implicitly take this object as a parameter.
-this methodology has dominated the industry for over 40 years which is too long for any solution in this industry.
-The increasing need for distributed, stateless, fault-tolerant, concurrent, datacentric systems makes solutions based on these old methodologies harder to obtain and reason about. and here is where Immutability and Functional Programming fits in.
-contrary to what you might think it's not the new kid on the block FP is as old as the first computers with lambda calculus as it's foundation FP learns a lot from it's mathematical roots in many aspects mainly with it being declarative which allows for building outstanding compilers to understand it's concise declarative expressions. but in the old day computers couldn't afford the luxury of immutable data structures. Thus in place mutations encapsulated within an Object was the most reasonable way to go about doing things.\newline
-These days memory is so cheep you can always afford to store snapshots and create new structures along the way. 
-even though this is rarely the case since using the proper data structures and a deep understanding of the immutability constraints and it's implications which aren't only visible to programmers but also systems administrators data base managers files system distributed infrastructures
-
-\section{Methods}
-
-
-\subsection{Immutability Properties}
 % src
 % Immutability an Empirical Study in Scala.pdf
 When something is immutable, we say that it cannot be changed or that it is unchangeable. The definition
@@ -170,28 +157,19 @@ Concrete immutability does not allow any change to the object’s state. Abstrac
 allows an immutable object to change its internal state but not the object’s “abstract” value. The object
 is still immutable from the perspective of the object’s observer that can only see the abstract value, but
 the object may mutate internally. This can, for example, be useful to speed up certain operations, lazy
-initialization and buffering.
+initialization and buffering.\newline
+\textbf{The immutability properties are:}
 
-
-The immutability properties are:
-Mutable: We give a template the mutable property if an instance of that template can be mutated
+• Mutable: We give a template the mutable property if an instance of that template can be mutated
 directly or indirectly.
-Shallow immutable: A template has the shallow (non-transitive) immutable property if the template
-does not have fields that can be reassigned, but has references to other objects that may be
-mutated (are shallow immutable or mutable).
-Deeply immutable: A template is deeply (transitive) immutable if all instances of that template
-cannot be mutated after initialization.
-Conditionally deeply immutable: The conditionally deeply immutable property is given to a
-template that is deeply immutable but depends on some other potentially mutable type. An example
-of this is a generic collection that can store different types, and the collection itself is declared
-in a way so that it cannot be mutated, but the type that is used with the collection may be shallow
-immutable or mutable (an example of this is shown in listing 9).
-CHAPTER 4. METHODOLOGY 25
-As we have discovered in previous chapters, there are different types and properties of immutability.
-One immutability property not considered by our analysis is the notion of abstract immutability [3].
-The reasoning behind it is that abstract immutability is not simple enough, and to compute abstract immutability
-one would have to deal with a class’s internal state which could be set up in a multitude of
-different ways and track state changes [18].
+
+• Shallow immutable: A template has the shallow (non-transitive) immutable property if the template does not have fields that can be reassigned, but has references to other objects that may be mutated (are shallow immutable or mutable).
+
+• Deeply immutable: A template is deeply (transitive) immutable if all instances of that template cannot be mutated after initialization.
+
+• Conditionally deeply immutable: The conditionally deeply immutable property is given to a template that is deeply immutable but depends on some other potentially mutable type. An example of this is a generic collection that can store different types, and the collection itself is declared in a way so that it cannot be mutated, but the type that is used with the collection may be shallow immutable or mutable.
+
+\section{Methods}
 
 \subsection{Shadowing}
 
