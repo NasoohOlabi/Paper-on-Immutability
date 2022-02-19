@@ -173,72 +173,9 @@ tabsize=3}
 \newpage
 
 \section{Introduction}
+saff
 
-
-% src
-% Immutability an Empirical Study in Scala.pdf
-When something is immutable, we say that it cannot be changed or that it is unchangeable. The definition
-of an immutable object in an object-oriented programming language is an object that has a state
-that cannot be mutated once instantiated (created). Moreover, an immutable class is a class whose instances
-cannot be mutated, meaning that there are no methods in the class that can mutate an instance
-of it. Classes that are not immutable can, however, have instances of it that are immutable. 
-
-There are different varieties of immutability used in practice today, which includes:\newline
-\textbf{Object immutability}
-
-An immutable object is an object that cannot be modified (mutated), i.e., its state cannot be mutated.\newline
-\textbf{Class immutability}
-
-When every instantiated object of a class is immutable, then we say that the class itself is immutable.\newline
-\textbf{Deep and shallow immutability (transitivity)}
-
- Immutability can be deep or shallow, i.e., transitive or non-transitive:
-
- • \textbf{Deep (transitive)}
-
-immutability means that all objects referred to by an immutable object must also be immutable.
-
-• \textbf{Shallow (non-transitive)}
-
-immutability has a more relaxed constraint, and the immutable object may refer to objects that are mutable, but the fields of the immutable object itself cannot be mutated.\newline
-\textbf{Reference immutability (read-only references)}
-
-Languages with the support of reference immutability have the notion of read-only references. A readonly
-reference cannot mutate the object it is referring to. When all references to an object are readonly,
-then nothing can mutate the object, and the object is immutable. There are, however, often no
-guarantee that a referred to object is immutable because the object may still be mutated by some other
-reference that is not read-only, unless there is some analysis that ensures that there only exist readyonly
-references to that object. Reference immutability thus often ensure shallow (non-transitive)
-immutability and “reference immutability” does not mean that a reference itself is immutable.\newline
-\textbf{Non-assignability}
-
-Non-assignability is a form of immutability and property of a variable that makes sure that it cannot
-be reassigned. Since fields of objects are variables and if no variable can be reassigned after its initial
-assignment, the object is effectively immutable if what the fields are referring to is immutable. This
-make non-assignability give shallow (non-transitive) immutability too. Assignment of an object’s field
-mutates the object, but it does not mutate what was previously on the field or what was assigned to the
-field.\newline
-\textbf{Concrete and abstract immutability}
-
-Concrete immutability does not allow any change to the object’s state. Abstract immutability, however,
-allows an immutable object to change its internal state but not the object’s “abstract” value. The object
-is still immutable from the perspective of the object’s observer that can only see the abstract value, but
-the object may mutate internally. This can, for example, be useful to speed up certain operations, lazy
-initialization and buffering.\newline
-\textbf{The immutability properties are:}
-
-• Mutable: We give a template the mutable property if an instance of that template can be mutated
-directly or indirectly.
-
-• Shallow immutable: A template has the shallow (non-transitive) immutable property if the template does not have fields that can be reassigned, but has references to other objects that may be mutated (are shallow immutable or mutable).
-
-• Deeply immutable: A template is deeply (transitive) immutable if all instances of that template cannot be mutated after initialization.
-
-• Conditionally deeply immutable: The conditionally deeply immutable property is given to a template that is deeply immutable but depends on some other potentially mutable type. An example of this is a generic collection that can store different types, and the collection itself is declared in a way so that it cannot be mutated, but the type that is used with the collection may be shallow immutable or mutable.
-
-% write some problems
-
-\section{Complex State}
+\section{State Management}
 % https://medium.com/super-declarative/understanding-state-management-and-why-you-never-will-dd84b624d0e
 The term state management has gain traction over the last decade or so with the emergence of wide spread IT solutions along with it the ease of which you can make one of your own from whatever background you come from. And so depending on the underlying scenario the term could stand for:
 Data persistence management,
@@ -247,7 +184,7 @@ Programming paradigms,
 I/O (especially networking and caching), %% TODO: latency table
 Application architecture,
 Presentation behavior and 
-UI templating. So the term state management has been a catch-all term that really means “software engineering” from data modeling to parallel computing. 
+UI templating. So the term state management has been a catch-all term from data modeling to parallel computing. 
 
 \subsection{Data Persistence}
 
@@ -264,25 +201,23 @@ Application State (a.k.a. Program State) represents the totality of everything n
 %% -------------------------------
 
 %% https://dojotoolkit.org/documentation/tutorials/1.6/data_modeling/
- The Model-Viewer-Controller (MVC) is a dominant paradigm for application development. The MVC approach separates key common concerns for organized, manageable application code. Dojo is heavily based on MVC principles, and provides powerful helpers for MVC-structured applications. The foundation of a well-designed MVC application is a solid data model. Here we will see how we can leverage Dojo object stores and Stateful objects to create a robust model that can be used in the view and controller code.
- The model is the M in MVC. The data model represents the core information that your application is being used to access and manipulate. The model is the center of your application
+ %The Model-Viewer-Controller (MVC) is a dominant paradigm for application development. The MVC approach separates key common concerns for organized, manageable application code. Dojo is heavily based on MVC principles, and provides powerful helpers for MVC-structured applications. The foundation of a well-designed MVC application is a solid data model. Here we will see how we can leverage Dojo object stores and Stateful objects to create a robust model that can be used in the view and controller code. The model is the M in MVC. The data model represents the core information that your application is being used to access and manipulate. The model is the center of your application
 %%--------------------------------------
 
 
 
 %%%%https://www.researchgate.net/publication/2716493_The_Role_of_Distributed_State
-Distributed state offers the potential for improving the performance, coherency, and reliability of distributed systems. Unfortunately, distributed state also introduces consistency problems, crash sensitivity, time and space overheads, and complexity; these problems make it difficult to achieve the potential benefits. This paper describes the advantages and disadvantages of distributed state, and presents the NFS and Sprite file systems as examples of different tradeoffs. It does not appear possible to achieve all the advantages of distributed state and also avoid all the problems; rather, system designers must make compromises based on the needs of their individual environments. The Role of Distributed State February 19, 1990 1. Introduction Webster's New World Dictionary defines state as "a set of circumstances or attributes characterizing a person or thing at a given time" [4]. State plays a fundamental role in all computer systems. One way of characterizing computation is as a ...
+%Distributed state offers the potential for improving the performance, coherency, and reliability of distributed systems. Unfortunately, distributed state also introduces consistency problems, crash sensitivity, time and space overheads, and complexity; these problems make it difficult to achieve the potential benefits. This paper describes the advantages and disadvantages of distributed state, and presents the NFS and Sprite file systems as examples of different tradeoffs. It does not appear possible to achieve all the advantages of distributed state and also avoid all the problems; rather, system designers must make compromises based on the needs of their individual environments. The Role of Distributed State February 19, 1990 1. Introduction Webster's New World Dictionary defines state as "a set of circumstances or attributes characterizing a person or thing at a given time" [4]. State plays a fundamental role in all computer systems. One way of characterizing computation is as a ...
 %----------------
 
-Current solutions pitfalls
+Anti-Patterns or pitfalls includes:
+
 % http://www.padsweb.rwth-aachen.de/wvdaalst/publications/p514.pdf
 \subsubsection{Missing data}
-s the situation where some data element needs to be accessed, i.e. read or destroyed, but either it has never been created or it has been deleted without having been created again.
+Its' the situation where some data element needs to be accessed, i.e. read or destroyed, but either it has never been created or it has been deleted without having been created again.
 \subsubsection{Inconsistent Data} 
 Data is inconsistent if a task is using this data while some other task (or another instance of the same task) is writing to this data or is destroying it in parallel.
 %-----------------------------
-
-
 \subsection{Programming Paradigms}
 % https://www.geeksforgeeks.org/introduction-of-programming-paradigms/
 Programming paradigm is an approach to solve problem using some programming language or also we can say it is a method to solve a problem using tools and techniques that are available to us following some approach.
@@ -298,13 +233,56 @@ And so most paradigms have their own opinion on data manipulation for example: P
 
 
 %this format problems tech solutions
-\subsection{Using Immutability}
+\section{Immutability}
 
+
+% src
+% Immutability an Empirical Study in Scala.pdf
+When something is immutable, we say that it cannot be changed or that it is unchangeable. The definition of an immutable object in an object-oriented programming language is an object that has a state that cannot be mutated once instantiated (created). Moreover, an immutable class is a class whose instances cannot be mutated, meaning that there are no methods in the class that can mutate an instance of it. Classes that are not immutable can, however, have instances of it that are immutable. 
+
+\subsection{Forms of Immutability}
+There are different varieties of immutability used in practice today, which includes:
+\begin{itemize}
+    \item Object immutability
+    \begin{description}
+        \item[] An immutable object is an object that cannot be modified (mutated), i.e., its state cannot be mutated
+    \end{description}
+    \item Class immutability 
+    \begin{description}
+        \item[] When every instantiated object of a class is immutable, then we say that the class itself is immutable.
+    \end{description}
+    \item Deep and shallow immutability (transitivity)\begin{description}
+        \item[] Immutability can be deep or shallow, i.e., transitive or non-transitive:
+        \item[]Deep (transitive): immutability means that all objects referred to by an immutable object must also be immutable.
+        \item[]Shallow (non-transitive) immutability has a more relaxed constraint, and the immutable object may refer to objects that are mutable, but the fields of the immutable object itself cannot be mutated.
+    \end{description}    
+    \item Reference immutability (read-only references)
+     \begin{itemize}
+    \item[] Languages with the support of reference immutability have the notion of read-only references. A readonly reference cannot mutate the object it is referring to. When all references to an object are readonly, then nothing can mutate the object, and the object is immutable. There are, however, often no guarantee that a referred to object is immutable because the object may still be mutated by some other reference that is not read-only, unless there is some analysis that ensures that there only exist readonly references to that object. Reference immutability thus often ensure shallow (non-transitive) immutability and “reference immutability” does not mean that a reference itself is immutable.
+\end{itemize}
+
+
+\item Non-assignability
+     \begin{itemize}
+    \item[] Non-assignability is a form of immutability and property of a variable that makes sure that it cannot be reassigned. Since fields of objects are variables and if no variable can be reassigned after its initial assignment, the object is effectively immutable if what the fields are referring to is immutable. This make non-assignability give shallow (non-transitive) immutability too. Assignment of an object’s field mutates the object, but it does not mutate what was previously on the field or what was assigned to the field.
+\end{itemize}
+
+
+\item Concrete and abstract immutability
+     \begin{itemize}
+    \item[] Concrete immutability does not allow any change to the object’s state. Abstract immutability, however, allows an immutable object to change its internal state but not the object’s “abstract” value. The object is still immutable from the perspective of the object’s observer that can only see the abstract value, but the object may mutate internally. This can, for example, be useful to speed up certain operations, lazy initialization and buffering.
+\end{itemize}
+
+
+\end{itemize}
+
+\subsection{Properties of Immutability}
+% write some problems
 The concept of immutability is important and
 utilizing immutable data is considered to ease software development and reasoning about programs in
 numerous ways, for example:
 
-\textbf{1. Predictability} It is harder to understand and reason about programs that have shared mutable
+\subsubsection{Predictability} It is harder to understand and reason about programs that have shared mutable
 states with unclear interactions. Tracking mutations and maintaining the correct state of a program
 can be difficult. Using immutable data naturally, avoids state changes and forces the programmer
 to let data flow and be utilized in a different way throughout the program, making the state of the
@@ -312,16 +290,16 @@ program more predictable. For example, calling the same function twice would yie
 and the outcome is predictable. Without the immutability guarantee, the second call could
 yield another result because of an underlying state mutation making it less predictable.
 
-\textbf{2. Testability} Because immutable data can only be changed once during construction, they are inherently
+\subsubsection{Testability} Because immutable data can only be changed once during construction, they are inherently
 simpler and easier to unit test. One may reason that by restricting the number of possible mutations
 in a program; the number of potential errors of the program is also reduced. Testing is essentially
 to validate that mutations in the program occur correctly and thus having more mutations would require more testing. By restricting the number of mutations in a program, the program has
 fewer reasons for errors to occur and there are fewer state transitions to test.
 
-\textbf{3. Concurrency} Immutable data are thread-safe, as data cannot mutate, there is no danger in having
+\subsubsection{Concurrency} Immutable data are thread-safe, as data cannot mutate, there is no danger in having
 multiple threads access the same data at the same time and have synchronization issues.
 
-\textbf{4. Modularity} Without depending on a local or global state, immutable types and data may be reused
+\subsubsection{Modularity} Without depending on a local or global state, immutable types and data may be reused
 in different contexts more easily.
 
 \section{Methods}
@@ -355,10 +333,7 @@ Notice here n value range over \{n, ... , 1\} but it's not really changing each 
 if you run this code it'll only go so far (around  n = 9613 for this example) until you get a StackOverflowError... not good.
 
 \subsection{Reassignment}
-TODO: choose which one
-
-TODO: Paper definition:
-there's a subtle difference, well
+here's a subtle difference, well
 hidden behind the overloaded use of the symbol
 ‘=’, that really sets the two apart. In the imperative
 program, ‘=’ refers to a destructive update, assigning
@@ -370,13 +345,13 @@ transparency or purity) has a profound influence
 on the way programs are constructed and reasoned
 about.
 
-TODO: My definition:
-before we move on it's important to do the distinction between mutation and Reassignment. simply put when you mutate data the old version of it would become unusable and simple would cease to exist. On the other hand updating a variable should keep the old version usable. a perfect example of this is a VCS (version control system) it gives you the feeling that you are mutating files while in fact it's storing changes (updates) and updating a "HEAD" value to represent the last change (update)
+% TODO: My definition:
+% before we move on it's important to do the distinction between mutation and Reassignment. simply put when you mutate data the old version of it would become unusable and simple would cease to exist. On the other hand updating a variable should keep the old version usable. a perfect example of this is a VCS (version control system) it gives you the feeling that you are mutating files while in fact it's storing changes (updates) and updating a "HEAD" value to represent the last change (update)
 
 
 
 \subsection{Tail Recursion}
-Tail recursion is when you simply return the value of a function call at the end (tail) of your function, in other words your functions has done it's job and handing over the rest of the work to another function
+Tail recursion provides stack safety to our solutions and prevent Stackoverflows is when you simply return the value of a function call at the end (tail) of your function, in other words your functions has done it's job and handing over the rest of the work to another function
 \begin{lstlisting}
   def factorial (n: BigDecimal):BigDecimal = {
     def helper(n: BigDecimal, Acc: BigDecimal): BigDecimal = {
@@ -392,7 +367,7 @@ which is very similar to a for loop accumulator pattern, so similar that sometim
 
 
 \subsection{Pure Functions}
-Pure Functions when implemented correctly serves as a (possibly infinite) lookup table mapping from one type to another since variable $x$ will always be the same $f(x)$ will too. this is what's known as referential transparency.
+Pure Functions serves as a (possibly infinite) lookup table mapping from one type to another since variable $x$ will always be the same $f(x)$ will too. this is what's known as referential transparency.
 \lstset{style=cpp}
 \begin{lstlisting}
     #include <functional>
@@ -441,20 +416,20 @@ this behavior is implemented in some languages is what's known as Function0 that
 of the function with it to achieve predictable behavior contrary to just keeping references. but if the data is immutable it would make sense to only pack references this is what's referred to as laziness 
 
 
-\subsection{logfilesystem}
-sth
-\subsection{Append Logs}
-sth
-\subsection{Copy-On-Write}
-sth
-\subsection{Structural Sharing}
-effecient cow reduce the overhead of threading and parallel processing
-\subsection{MVC}
-sth
-\subsection{elm}
-sth
-\subsection{Cpp example}
-$https://www.youtube.com/watch?v=y_m0ce1rzRI\&t=4081s$
+% \subsection{logfilesystem}
+% sth
+% \subsection{Append Logs}
+% sth
+% \subsection{Copy-On-Write}
+% sth
+% \subsection{Structural Sharing}
+% effecient cow reduce the overhead of threading and parallel processing
+% \subsection{MVC}
+% sth
+% \subsection{elm}
+% sth
+% \subsection{Cpp example}
+% $https://www.youtube.com/watch?v=y_m0ce1rzRI\&t=4081s$
 \section*{References}
 [1] 
 
@@ -482,6 +457,7 @@ $https://www.youtube.com/watch?v=y_m0ce1rzRI\&t=4081s$
 % lazyness
 % transperncy substitiustion model
 % GC or static refs
+
 
 % chanllenging
 % modularity
