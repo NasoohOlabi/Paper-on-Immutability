@@ -243,7 +243,7 @@ Programming paradigm is an approach to solve problem using some programming lang
 %----------------------------------------
 And so most paradigms have their own opinion on data manipulation for example: Procedural \& Object Oriented paradigms allows more access to data modifying (destructive updates), deleting. Others like Logic \& Functional doesn't allow them.
 
-\subsection{I/O (especially networking and caching)}
+\subsection{I/O, Network and Disk}
 %https://www.solarwinds.com/-/media/solarwinds/swdcv2/licensed-products/storage-resource-monitor/resources/whitepapers/top_4_causes_of_storage_io_bottlenecks.ashx
 Applications that are I/O heavy often cause bottlenecks. As well as often causing the problem, I/O intensive applications are often more sensitive to a storage latency issue. When you have a large user base trying to access these applications, slowdowns tend to take place. Increased response time in storage I/O causes bottlenecks. When there is a queue in the storage I/O, you would generally see an increase in latency.
 Network and Disk latency are often times the biggest source of headache if poorly managed, which is often times the case since they're usually treated as if they were function calls which they're clearly not.
@@ -281,7 +281,7 @@ branch misprediction &	5 nanosec\\
 \end{tabularx}
     
 \end{center}
-\caption{ \label{tab:1} Latency numbers every programmer should know}
+\caption{ \label{tab:1} Latency numbers every programmer should know[1]}
 \end{table}
 \end{center}
 As you can see disk fetches can take 100x more than main memory fetches. And when dealing with distributed systems were network call are an integral part of the system treating network call which 100000x more than main memory calls you end up with catastrophically unpredictable behavior
@@ -368,9 +368,8 @@ in different contexts more easily.
 Shadowing is a technique that could represent a changing variable. for instance, an accumulator. the technique is simple and possible in almost every programming language out there.
 at it's simplest form shadowing looks like this:
 \begin{lstlisting}
-    // Scala  
-    object Main {
-        def main(args: Array[String]){
+    scala> object Main {
+        def main(args: Array[String]) = {
             val i = 1;
             {
                 val i = 2;
@@ -383,7 +382,7 @@ at it's simplest form shadowing looks like this:
 \end{lstlisting}
 But that's not really useful and even more confusing and very error prone and I'd agree shadowing in of it's self isn't really useful but it's really at the core of any recursive solution since every function come with it's own block and 
 \begin{lstlisting} 
-    def factorial (n: BigDecimal):BigDecimal = {
+    scala> def factorial (n: BigDecimal):BigDecimal = {
         if (n <= 1)  1
         else n * factorial(n-1)
     }
@@ -470,25 +469,30 @@ sometimes referred to as call-by-need, it's the notion that "if data won't chang
 \end{lstlisting}
 in this example only 10 elements of the infinite "LazyList" are evaluated while the other elements are immutable they are yet to be evaluated and materialized.
 
-Another huge advantage lazy evaluation gives us
 
 
-% \subsection{logfilesystem}
-% sth
-% \subsection{Append Logs}
-% sth
-% \subsection{Copy-On-Write}
-% sth
+
+
+%###############################################
+%######## Must Use Resource ####################
+%###############################################
+% Another huge advantage lazy evaluation gives us is the ability to use DAGs to optimize complex and large jobs
+% https://techvidvan.com/tutorials/apache-spark-dag-directed-acyclic-graph/
+
+
 % \subsection{Structural Sharing}
-% effecient cow reduce the overhead of threading and parallel processing
-% \subsection{MVC}
-% sth
-% \subsection{elm}
-% sth
 % \subsection{Cpp example}
 % $https://www.youtube.com/watch?v=y_m0ce1rzRI\&t=4081s$
+% \subsection{Copy-On-Write}
+% \subsection{logfilesystem}
+% \subsection{Append Logs}%not important
+% effecient cow reduce the overhead of threading and parallel processing
+% sth
+% \subsection{MVC}
+% \subsection{elm}
+% sth
 \section*{References}
-[1] 
+[1] Peter Norvig $http://norvig.com/21-days.html\#answers$
 
 %TODO: talk about referential transparency
 %TODO: use these links:
@@ -528,7 +532,7 @@ Another huge advantage lazy evaluation gives us
 
 
 \section*{Acknowledgements}
-The author wishes to thank Blabla and bla
+Thank you for your time
 
 \printbibliography
 
