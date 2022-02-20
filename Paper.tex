@@ -6,6 +6,8 @@
 \usepackage[utf8]{inputenc} %Standard diacritics in Romance languages (accents, umlauts)
 \usepackage{times} %Uses Times New Roman font
 \usepackage{wasysym}
+\usepackage{tabularx}
+\usepackage{float}
 \usepackage{diagbox}
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
@@ -64,17 +66,17 @@ tabsize=3}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[LE]{\thepage \hspace{3mm} \small Isogloss YEAR, ISSUE/NR}
-\fancyhead[RE]{\small Author}
-\fancyhead[LO]{\small Title of paper}
-\fancyhead[RO]{\small Isogloss YEAR, 1/2 \normalsize \thepage}
+\fancyhead[LE]{\thepage \hspace{3mm} \small }
+\fancyhead[RE]{\small Nassouh AlOlabi}
+\fancyhead[LO]{\small Complex State Management with Immutability}
+\fancyhead[RO]{\small  \normalsize \thepage}
 \fancyfoot{}
-%\setcounter{page}{23} %This sets the initial page at a number other than 1 (in this case 23).
+\setcounter{page}{-3} %This sets the initial page at a number other than 1 (in this case 23).
 
 \fancypagestyle{first}{
 	\fancyhead{}
-	\fancyhead[L]{\small ISSN 2835-4138 (digital)\\https://doi.org/10.5565/rev/isogloss.\\{}}
-	\fancyhead[R]{\small Isogloss YEAR, ISSUE/NR\\PAGES\\{}}
+	\fancyhead[L]{\small Higher Institute for Applied Sciences and Technology \\https://hiast.edu.sy\\{}}
+	\fancyhead[R]{\small IT Dept. 2022, \\15\\{}}
 	\fancyfoot{}}
 	%don't worry about the headers, we will compile them
 
@@ -106,7 +108,7 @@ tabsize=3}
 \makeatother
 
 \title{\Huge{Complex State Management with Immutability}}
-\author{Nassouh AlOlabi} \affil{anon \\email} 
+\author{Nassouh AlOlabi - Dr.Yasser Rahal} \affil{nassouh.alolabi@hiast.edu.sy} 
 \setlength{\affilsep}{1pt}
 \date{}
 
@@ -119,22 +121,26 @@ tabsize=3}
 
 \begin{document}
 
+\pagenumbering{roman}
 
+\begin{figure}
+    \centerline{\includegraphics[scale=.25]{logo.png}}
+\end{figure}
 \maketitle
 
 \thispagestyle{first}
 
 \vspace{0.5cm}
 
-\hfill Received: 20-01-2034 
+\hfill Received: 22-02-2022 
 
-\hfill Accepted: 21-01-2034
+\hfill Accepted: 25-02-2022
 
-\hfill Published: 22-01-2034
+\hfill Published: 05-03-2022
 
 \vspace{1cm}
 
-\noindent \textbf{How to cite} Leave blank
+% \noindent \textbf{How to cite} Leave blank
 
 \vspace{1.5cm}
 
@@ -172,8 +178,21 @@ tabsize=3}
 \tableofcontents
 \newpage
 
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
 \section{Introduction}
-saff
+% immutability an empircal study in scala
+Unintended mutations of a program’s state are one reason for inconsistent behavior and bugs of the
+program. These mutations might have been introduced by side-effects of functions that developers
+were unaware of during the program’s implementation. Some programming languages do, for example,
+allow arguments of a function to be mutated. The fact that a third-party function can mutate the
+state of its argument can go undetected. The problem of rogue and complicated state mutations can
+become difficult to handle when states are shared among objects. One way to avoid undesired mutations
+is to use immutable data instead of mutable data. Immutable data cannot be mutated once created
+and instead of mutating shared data in memory, data would have to be re-created to include the modifications
+needed. Programmers can then safely share data without the possibility of having it mutate to
+something else, which is crucial to avoid, for example, race conditions in concurrent programs.
 
 \section{State Management}
 % https://medium.com/super-declarative/understanding-state-management-and-why-you-never-will-dd84b624d0e
@@ -225,7 +244,47 @@ Programming paradigm is an approach to solve problem using some programming lang
 And so most paradigms have their own opinion on data manipulation for example: Procedural \& Object Oriented paradigms allows more access to data modifying (destructive updates), deleting. Others like Logic \& Functional doesn't allow them.
 
 \subsection{I/O (especially networking and caching)}
-
+%https://www.solarwinds.com/-/media/solarwinds/swdcv2/licensed-products/storage-resource-monitor/resources/whitepapers/top_4_causes_of_storage_io_bottlenecks.ashx
+Applications that are I/O heavy often cause bottlenecks. As well as often causing the problem, I/O intensive applications are often more sensitive to a storage latency issue. When you have a large user base trying to access these applications, slowdowns tend to take place. Increased response time in storage I/O causes bottlenecks. When there is a queue in the storage I/O, you would generally see an increase in latency.
+Network and Disk latency are often times the biggest source of headache if poorly managed, which is often times the case since they're usually treated as if they were function calls which they're clearly not.
+% http://norvig.com/21-days.html#answers
+\begin{center}
+    \begin{table}[H]
+        \begin{center}
+        \begin{tabularx} {0.8\textwidth}{ 
+            | >{\raggedright\arraybackslash}X 
+        | >{\raggedleft\arraybackslash}X | }
+        \hline
+        execute typical instruction &	1/1,000,000,000 sec = 1 nanosec\\
+\hline
+    fetch from L1 cache memory &	0.5 nanosec\\
+\hline
+branch misprediction &	5 nanosec\\
+\hline
+    fetch from L2 cache memory &	7 nanosec\\
+\hline
+    Mutex lock/unlock &	25 nanosec\\
+\hline
+    fetch from main memory &	100 nanosec\\
+\hline
+    send 2K bytes over 1Gbps network &	20,000 nanosec\\
+    \hline
+    read 1MB sequentially from memory &	250,000 nanosec\\
+\hline
+    fetch from new disk location (seek) &	8,000,000 nanosec\\
+\hline
+    read 1MB sequentially from disk &	20,000,000 nanosec\\
+\hline
+    send packet US to Europe and back &	150 milliseconds = 150,000,000 nanosec\\
+    \hline      
+    % \float
+\end{tabularx}
+    
+\end{center}
+\caption{ \label{tab:1} Latency numbers every programmer should know}
+\end{table}
+\end{center}
+As you can see disk fetches can take 100x more than main memory fetches. And when dealing with distributed systems were network call are an integral part of the system treating network call which 100000x more than main memory calls you end up with catastrophically unpredictable behavior
 
 
 
@@ -409,11 +468,9 @@ sometimes referred to as call-by-need, it's the notion that "if data won't chang
         .toList // now it's necessary
 
 \end{lstlisting}
-this behavior is implemented in some languages is what's known as Function0 that is "a function without parameters" but this would be somewhat expensive since you have to pack (copy) the closure
+in this example only 10 elements of the infinite "LazyList" are evaluated while the other elements are immutable they are yet to be evaluated and materialized.
 
-
-%TODO: explain what a closure is ...
-of the function with it to achieve predictable behavior contrary to just keeping references. but if the data is immutable it would make sense to only pack references this is what's referred to as laziness 
+Another huge advantage lazy evaluation gives us
 
 
 % \subsection{logfilesystem}
