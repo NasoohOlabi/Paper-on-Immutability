@@ -9,6 +9,7 @@
 \usepackage{tabularx}
 \usepackage{float}
 \usepackage{diagbox}
+\usepackage{hyperref}
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
 \usepackage[style=authoryear-icomp,natbib=true,sortcites=true]{biblatex}% natbib=true so we can use natbib commands with biblatex
@@ -108,7 +109,7 @@ tabsize=3}
 \makeatother
 
 \title{\Huge{Complex State Management with Immutability}}
-\author{Nassouh AlOlabi - Dr.Yasser Rahal} \affil{nassouh.alolabi@hiast.edu.sy} 
+\author{Nassouh AlOlabi, Dr.Yasser Rahal, Fahmi Alammareen} \affil{nassouh.alolabi@hiast.edu.sy} 
 \setlength{\affilsep}{1pt}
 \date{}
 
@@ -124,8 +125,9 @@ tabsize=3}
 \pagenumbering{roman}
 
 \begin{figure}
-    \centerline{\includegraphics[scale=.25]{logo.png}}
+    {\includegraphics[scale=.25]{logo.png}}
 \end{figure}
+
 \maketitle
 
 \thispagestyle{first}
@@ -149,7 +151,7 @@ tabsize=3}
  	\line(1,0){430}
 \end{center}
 \vspace{-0,3cm}
-\noindent Recent growing demand for fault-tolerant, scalable, distributed systems has made some mainstream software architectures and patterns obsolete or rather harder to come by, and thus came the rise of stateless and functional solutions based on data immutability which has already been the cornerstone of "Big Data"
+\noindent Recent growing demand for fault-tolerant, scalable, distributed systems has made some mainstream software architectures and patterns obsolete or rather harder to come by, and thus came the rise of stateless and functional solutions based on data immutability which has already been the cornerstone of Big Data [1].
 
 \vspace{5mm}
 
@@ -229,7 +231,7 @@ Application State (a.k.a. Program State) represents the totality of everything n
 %Distributed state offers the potential for improving the performance, coherency, and reliability of distributed systems. Unfortunately, distributed state also introduces consistency problems, crash sensitivity, time and space overheads, and complexity; these problems make it difficult to achieve the potential benefits. This paper describes the advantages and disadvantages of distributed state, and presents the NFS and Sprite file systems as examples of different tradeoffs. It does not appear possible to achieve all the advantages of distributed state and also avoid all the problems; rather, system designers must make compromises based on the needs of their individual environments. The Role of Distributed State February 19, 1990 1. Introduction Webster's New World Dictionary defines state as "a set of circumstances or attributes characterizing a person or thing at a given time" [4]. State plays a fundamental role in all computer systems. One way of characterizing computation is as a ...
 %----------------
 
-Anti-Patterns or pitfalls includes:
+Anti-Patterns or pitfalls includes[2]:
 
 % http://www.padsweb.rwth-aachen.de/wvdaalst/publications/p514.pdf
 \subsubsection{Missing data}
@@ -244,9 +246,9 @@ Programming paradigm is an approach to solve problem using some programming lang
 And so most paradigms have their own opinion on data manipulation for example: Procedural \& Object Oriented paradigms allows more access to data modifying (destructive updates), deleting. Others like Logic \& Functional doesn't allow them.
 
 \subsection{I/O, Network and Disk}
-%https://www.solarwinds.com/-/media/solarwinds/swdcv2/licensed-products/storage-resource-monitor/resources/whitepapers/top_4_causes_of_storage_io_bottlenecks.ashx
+% https://www.solarwinds.com/-/media/solarwinds/swdcv2/licensed-products/storage-resource-monitor/resources/whitepapers/top_4_causes_of_storage_io_bottlenecks.ashx
 Applications that are I/O heavy often cause bottlenecks. As well as often causing the problem, I/O intensive applications are often more sensitive to a storage latency issue. When you have a large user base trying to access these applications, slowdowns tend to take place. Increased response time in storage I/O causes bottlenecks. When there is a queue in the storage I/O, you would generally see an increase in latency.
-Network and Disk latency are often times the biggest source of headache if poorly managed, which is often times the case since they're usually treated as if they were function calls which they're clearly not.
+Network and Disk latency are often times the biggest source of headache if poorly managed, which is often times the case since they're usually treated as if they were function calls which they're clearly not [3].
 % http://norvig.com/21-days.html#answers
 \begin{center}
     \begin{table}[H]
@@ -281,7 +283,7 @@ branch misprediction &	5 nanosec\\
 \end{tabularx}
     
 \end{center}
-\caption{ \label{tab:1} Latency numbers every programmer should know[1]}
+\caption{ \label{tab:1} Latency numbers every programmer should know[4]}
 \end{table}
 \end{center}
 As you can see disk fetches can take 100x more than main memory fetches. And when dealing with distributed systems were network call are an integral part of the system treating network call which 100000x more than main memory calls you end up with catastrophically unpredictable behavior
@@ -317,7 +319,7 @@ There are different varieties of immutability used in practice today, which incl
     \end{description}    
     \item Reference immutability (read-only references)
      \begin{itemize}
-    \item[] Languages with the support of reference immutability have the notion of read-only references. A readonly reference cannot mutate the object it is referring to. When all references to an object are readonly, then nothing can mutate the object, and the object is immutable. There are, however, often no guarantee that a referred to object is immutable because the object may still be mutated by some other reference that is not read-only, unless there is some analysis that ensures that there only exist readonly references to that object. Reference immutability thus often ensure shallow (non-transitive) immutability and “reference immutability” does not mean that a reference itself is immutable.
+    \item[] Languages with the support of reference immutability have the notion of read-only references. A readonly reference cannot mutate the object it is referring to. When all references to an object are readonly, then nothing can mutate the object, and the object is immutable. There are, however, often no guarantee that a referred to object is immutable because the object may still be mutated by some other reference that is not read-only, unless there is some analysis that ensures that there only exist readonly references to that object. Reference immutability thus often ensure shallow (non-transitive) immutability and “reference immutability” does not mean that a reference itself is immutable [5].
 \end{itemize}
 
 
@@ -451,7 +453,7 @@ Pure Functions serves as a (possibly infinite) lookup table mapping from one typ
 generally speaking $"someFunction"$ and $"otherFunction"$ could've done al sorts of things with $a$ (changing an element value, adding more elements, removing some elements, delete the pointer entirely ...) but if they were pure functions or like in this case using a some sort of a language guarantee (here it's $const$) $a$ will not be modified and in turns $total == sum(a,6)$ and overall our program would be easier to reason about.
 
 \subsection{Laziness}
-sometimes referred to as call-by-need, it's the notion that "if data won't change and functions won't neither so would results" meaning that we wouldn't perfome any operations unless they're absolutely necessary 
+sometimes referred to as call-by-need, it's the notion that "if data won't change and functions won't neither so would results" meaning that we wouldn't perform any operations unless they're absolutely necessary 
 \lstset{style=scala}
 \begin{lstlisting}
     def from(n: Int): LazyList[Int] = 
@@ -492,7 +494,12 @@ in this example only 10 elements of the infinite "LazyList" are evaluated while 
 % \subsection{elm}
 % sth
 \section*{References}
-[1] Peter Norvig $http://norvig.com/21-days.html\#answers$
+[1] ODBMS.org \url{http://www.odbms.org/2014/03/2014-gartner-magic-quadrant-data-warehouse-database-management-systems/} \newline
+[2] RWTH Aachen University \url{http://www.padsweb.rwth-aachen.de/wvdaalst/publications/p514.pdf} \newline
+[3] solarwinds \url{https://www.solarwinds.com/-/media/solarwinds/swdcv2/licensed-products/storage-resource-monitor/resources/whitepapers/top_4_causes_of_storage_io_bottlenecks.ashx} \newline
+[4] Peter Norvig \url{http://norvig.com/21-days.html\#answers} \newline
+[5] DiVA 2017 \url{http://www.diva-portal.org/smash/record.jsf?pid=diva2\%3A1150007\&dswid=-5530} \newline 
+
 
 %TODO: talk about referential transparency
 %TODO: use these links:
