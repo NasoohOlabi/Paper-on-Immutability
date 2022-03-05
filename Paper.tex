@@ -76,8 +76,8 @@ tabsize=3}
 
 \fancypagestyle{first}{
 	\fancyhead{}
-	\fancyhead[L]{\small Higher Institute for Applied Sciences and Technology \\https://hiast.edu.sy\\{}}
-	\fancyhead[R]{\small IT Dept. 2022, \\15\\{}}
+	\fancyhead[L]{\small Higher Institute for Applied Sciences and Technology \\\url{https://hiast.edu.sy}\\{}}
+	\fancyhead[R]{\small IT Dept. 2022, \\{}}
 	\fancyfoot{}}
 	%don't worry about the headers, we will compile them
 
@@ -109,7 +109,7 @@ tabsize=3}
 \makeatother
 
 \title{\Huge{Complex State Management with Immutability}}
-\author{Nassouh AlOlabi, Dr.Yasser Rahal, Fahmi Alammareen} \affil{nassouh.alolabi@hiast.edu.sy} 
+\author{Nassouh AlOlabi} \affil{Supervised By: Dr.Yasser Rahal, Fahmi Alammareen} 
 \setlength{\affilsep}{1pt}
 \date{}
 
@@ -470,13 +470,57 @@ sometimes referred to as call-by-need, it's the notion that "if data won't chang
 
 \end{lstlisting}
 in this example only 10 elements of the infinite "LazyList" are evaluated while the other elements are immutable they are yet to be evaluated and materialized.
+% \subsection{Copy-On-Write (COW)}
+% https://en.wikipedia.org/wiki/Copy-on-write
+% https://www.researchgate.net/publication/220143982_Effects_of_Copy-on-Write_Memory_Management_on_the_Response_Time_of_UNIX_Fork_Operations
+
+\subsection{Structural Sharing}
+While imperative programmers are very careful with passing references around and often times rely on cloning. on the other hand persistent data structures allows for more flexibility and safety in sharing and reusing data with ease.
+\begin{figure}[H]
+    \begin{center}
+        {\includegraphics[scale=.65]{originalTree.png}}
+    \end{center}
+    \caption{ \label{figure:1} Original BST for the corresponding values [a,b,c,d,f,g,h]}
+\end{figure}
+now what if you wanted to add Node(e) to our Binary Search Tree. now if we were to naively implement an algorithm that would insert the node without mutation is to clone the tree and afterwards do the desired mutations. on the other hand if we consider immutability as and advantage we'll take into account that unaffected node (nodes that we don't need to modify e.g. nodes b,a,c,h) would never change and we can safely reuse them.
+\begin{figure}[H]
+    \begin{center}
+        {\includegraphics[scale=.6]{structuralSharing.png}}
+       \end{center}
+       \caption{ \label{figure:2} Resulting BST ys which shares most of the elements in xs}
+\end{figure}
+Structural Sharing is a very powerful technique and is the core concept for many of optimization techniques such as Copy-on-write paging strategies for address space
+inheritance have been shown to be effective in reducing the
+real time required to perform UNIX fork() operations. This reduction in copying also reduces the amount of
+swap space required, reduces the amount of time spent swapping, increases the number of processes which can be run
+without paging, and decreases the cost of context switches.[6]
 
 
+\section{Solutions}
+% me<<<
+% Incorporating Immutability as a key architectural concept throughout memory layers in a system is
 
+% immutability changes everything<<<
+% The trend to leverage immutability in new designs is so pervasive we see it in a number of hardware areas. We first examine the implementation of SSDs, then some new trends in hard disks
+
+% mix<<<
+The trend to leverage immutability as a key architectural concept in new designs is so pervasive we see it in a number of new technologies and open source systems, we'll go through the same four areas of state management and see flagship technologies that leverage immutability in some of their features:
+
+\subsection{Copy-on-Write File Systems}
+% COW based file Systems
+Most COW-based file systems provides the ability to take snapshots of your files.
+A snapshot is a consistent image of the data at a specific point in time. By data I mean the contents of a Fle system, the contents of a database, etc. Snapshots can be read only, or read/write. Writable snapshots are also called clones. Snapshots are extremely useful and have many applications: data recovery,online data protection, undo Fle system operations, testing new installations and configurations, backup solutions, data mining, and more. 
+Leveraging immutability in the implementation snapshots
+% https://repositum.tuwien.at/handle/20.500.12708/10774
+One of the uses of the snapshot is for enabling of consistent backups. A backup can get inconsistent if during the backup the file system is used. 
+
+% https://www.youtube.com/watch?v=lsFDp-W1Ks0
+% last dacade disk size grow almost 8 folds
+% while speed almost doubled
 
 
 %###############################################
-%######## Must Use Resource ####################
+%############# Must Use Resource ###############
 %###############################################
 % Another huge advantage lazy evaluation gives us is the ability to use DAGs to optimize complex and large jobs
 % https://techvidvan.com/tutorials/apache-spark-dag-directed-acyclic-graph/
@@ -493,13 +537,15 @@ in this example only 10 elements of the infinite "LazyList" are evaluated while 
 % \subsection{MVC}
 % \subsection{elm}
 % sth
+% https://www.citationmachine.net/bibliographies/aefbbb90-00f3-449b-b369-1148cb3d2bb0
 \section*{References}
-[1] ODBMS.org \url{http://www.odbms.org/2014/03/2014-gartner-magic-quadrant-data-warehouse-database-management-systems/} \newline
-[2] RWTH Aachen University \url{http://www.padsweb.rwth-aachen.de/wvdaalst/publications/p514.pdf} \newline
-[3] solarwinds \url{https://www.solarwinds.com/-/media/solarwinds/swdcv2/licensed-products/storage-resource-monitor/resources/whitepapers/top_4_causes_of_storage_io_bottlenecks.ashx} \newline
-[4] Peter Norvig \url{http://norvig.com/21-days.html\#answers} \newline
-[5] DiVA 2017 \url{http://www.diva-portal.org/smash/record.jsf?pid=diva2\%3A1150007\&dswid=-5530} \newline 
-
+[1] Berman, J. J. (2018). Immutability and Immortality. In Principles and practice of big data: Preparing, sharing, and analyzing complex information (pp. 80–85). essay, Academic Press. \newline
+[2] Trcka, Nikola \& Aalst, Wil \& Sidorova, Natalia. (2009). Data-Flow Anti-patterns: Discovering Data-Flow Errors in Workflows. Proceedings of the International Conference on Advanced Information Systems Engineering (CAiSE). 5565. 425-439. 10.1007/978-3-642-02144-2_34. \newline
+[3] Solarwinds: Top 4 Causes Of Storage I/O Bottlenecks \& How To Mitigate Them  \newline
+[4] Norvig, P. (n.d.). Teach yourself programming in ten years. Retrieved March 5, 2022, from \url{http://norvig.com/21-days.html#answers} \newline
+[5] Axelsson, L. (2017). Immutability : An Empirical Study in Scala LUDVIG AXELSSON. \newline 
+[6] Smith, Jonathan \& Jr, Gerald. (1988). Effects of Copy-on-Write Memory Management on the Response Time of UNIX Fork Operations.. Computing Systems. 1. 255-278.
+[7] Levrinc, R. (2008). LLFS : a copy-on-write file system for Linux [Diploma Thesis]. reposiTUm. \url{https://resolver.obvsg.at/urn:nbn:at:at-ubtuw:1-28018}
 
 %TODO: talk about referential transparency
 %TODO: use these links:
