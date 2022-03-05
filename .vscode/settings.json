@@ -1,8 +1,6 @@
 {
     "cSpell.words": [
-        "datacentric"
-    ],
-    "files.watcherExclude": {
-        "**/target": true
-    }
+        "Stackoverflows",
+        "templating"
+    ]
 }

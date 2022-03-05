@@ -1,6 +1,3 @@
-paper.aux
-paper.fdb_latexmk
-paper.fls
-paper.log
-paper.synctex.gz
-p.py
+.gitignore
+*
+!Paper.tex
