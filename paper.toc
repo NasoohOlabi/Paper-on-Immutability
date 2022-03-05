@@ -1,0 +1,14 @@
+\contentsline {section}{\numberline {I}Introduction}{1}{}%
+\contentsline {section}{\numberline {II}Methods}{2}{}%
+\contentsline {subsection}{\numberline {\mbox {II-A}}Shadowing}{2}{}%
+\contentsline {subsection}{\numberline {\mbox {II-B}}Reassignment}{2}{}%
+\contentsline {subsection}{\numberline {\mbox {II-C}}Tail Recursion}{3}{}%
+\contentsline {subsection}{\numberline {\mbox {II-D}}Pure Functions}{3}{}%
+\contentsline {subsection}{\numberline {\mbox {II-E}}Laziness}{3}{}%
+\contentsline {subsection}{\numberline {\mbox {II-F}}logfilesystem}{3}{}%
+\contentsline {subsection}{\numberline {\mbox {II-G}}Append Logs}{3}{}%
+\contentsline {subsection}{\numberline {\mbox {II-H}}Copy-On-Write}{3}{}%
+\contentsline {subsection}{\numberline {\mbox {II-I}}Structural Sharing}{3}{}%
+\contentsline {subsection}{\numberline {\mbox {II-J}}MVC}{3}{}%
+\contentsline {subsection}{\numberline {\mbox {II-K}}elm}{3}{}%
+\contentsline {subsection}{\numberline {\mbox {II-L}}Cpp example}{3}{}%
