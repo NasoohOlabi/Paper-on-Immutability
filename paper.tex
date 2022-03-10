@@ -149,7 +149,7 @@ tabsize=3}
  	\line(1,0){430}
 \end{center}
 \vspace{-0,3cm}
-\noindent Recent growing demand for fault-tolerant, scalable, distributed systems has made some mainstream software architectures and patterns obsolete or rather harder to come by, and thus came the rise of stateless and functional solutions based on data immutability which has already been the cornerstone of Big Data [1].
+\noindent Growing demand for fault-tolerant, scalable, distributed systems has made some mainstream software architectures and patterns obsolete or rather harder to come by, Thus came the rise of stateless and functional solutions based on data immutability which has already been the cornerstone of Big Data [1].
 
 \vspace{5mm}
 
@@ -183,7 +183,7 @@ tabsize=3}
 
 \section{Introduction}
 % immutability an empircal study in scala
-Unintended mutations of a program’s state are one reason for inconsistent behavior and bugs of the
+Unintended mutations of a program’s state cause inconsistent behavior and bugs of the
 program. These mutations might have been introduced by side-effects of functions that developers
 were unaware of during the program’s implementation. Some programming languages do, for example,
 allow arguments of a function to be mutated. The fact that a third-party function can mutate the
@@ -196,25 +196,25 @@ something else, which is crucial to avoid, for example, race conditions in concu
 
 \section{State Management}
 % https://medium.com/super-declarative/understanding-state-management-and-why-you-never-will-dd84b624d0e
-The term state management has gain traction over the last decade or so with the emergence of wide spread IT solutions along with it the ease of which you can make one of your own from whatever background you come from. And so depending on the underlying scenario the term could stand for:
+The term state management has gain traction over the last decade or so with the emergence of wide spread IT solutions and the ease of making one of your own from whatever background you come from. Depending on the underlying scenario the term could stand for:
 Data persistence management,
 Information flow,
 Programming paradigms,
 I/O (especially networking and caching), %% TODO: latency table
 Application architecture,
 Presentation behavior and 
-UI templating. So the term state management has been a catch-all term from data modeling to parallel computing. 
+UI templating. Therefore the term state management has been a catch-all term from data modeling to parallel computing. 
 
 \subsection{Data Persistence}
 
 %%-----------https://www.researchgate.net/publication/221596019_Analyzing_persistent_state_interactions_to_improve_state_management ---------
-A primary challenge to building reliable and secure computer systems is managing the persistent state of the system: all the executable files, configuration settings and other data that govern how a system functions. The difficulty comes from the sheer volume of this persistent state, the frequency of changes to it, and the variety of workloads and requirements that require customization of persistent state. The cost of not managing a system's persistent state effectively is high: configuration errors are the leading cause of downtime at Internet services, troubleshooting configuration problems is a leading component of total cost of ownership in corporate environments, and malware—effectively, unwanted persistent state—is a serious privacy and security concern on personal computers.
+A primary challenge to building reliable and secure computer systems is managing the persistent state of the system: all the executable files, configuration settings and other data that govern how a system functions. The difficulty comes from the sheer volume of this persistent state, the frequency of it's changes, and the variety of workloads and requirements that require customization of persistent state. The cost of not managing a system's persistent state effectively is high: configuration errors are the leading cause of downtime at Internet services, troubleshooting configuration problems is a leading component of total cost of ownership in corporate environments, and malware—effectively, unwanted persistent state—is a serious privacy and security concern on personal computers.
 %In this paper, we analyze how computer systems dynamically interact with files and configuration settings in an attempt to gain insights into the problem of persistent state management. We analyze over 3648 machine days of these persistent state interactions, collected over an 8 month period from 193 machines. These machines are under real workloads and include Internet servers, corporate desktops, and home machines. We characterize the scope and magnitude of the persistent state management problem today, measuring not only the gross characteristics of persistent state, but also analyzing how it is used by applications, and when administrators and users modify it. We find that monitoring persistent state interactions provides important visibility and show how it can be used as a foundation for building better persistent state management tools.
 %%----------------------------------------------------
 
 \subsection{Information Flow}
 %%https://thedaylightstudio.com/blog/2018/03/14/what-is-state-in-web-application-development
-Application State (a.k.a. Program State) represents the totality of everything necessary to keep your application running.  When we refer to application state we are normally referring to the state of the program as it exists in the contents of its memory.  But what does that mean practically?  How am I to understand that?  It helps to think in extremes.  What happens to information and functionality core to your application if a server goes down and restarts?  You lose whatever was residing in memory.
+Application State (a.k.a. Program State) represents everything necessary to keep your application running.  When we refer to application state we are normally referring to the state of the program as exists in the contents of its memory.  What does that mean practically?  How am I to understand that?  It helps to think in extremes.  What happens to information and functionality core to your application if a server goes down and restarts?  You lose whatever was residing in memory.
 
 %This is one of the reasons why in web development we often use stateless resource controllers which disseminate the information necessary to the running of your application in a way that does not rely heavily on holding data for retrieval on the server’s memory.
 %% -------------------------------

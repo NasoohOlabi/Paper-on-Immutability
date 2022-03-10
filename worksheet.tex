@@ -1,0 +1,43 @@
+
+\documentclass[12pt,twoside]{article}
+\usepackage{tabularx}
+
+\begin{document}
+    
+\begin{center}
+    \begin{table}
+        \begin{center}
+        \begin{tabularx} {0.8\textwidth}{ 
+            | >{\raggedright\arraybackslash}X 
+        | >{\raggedleft\arraybackslash}X | }
+        \hline
+        execute typical instruction &	1/1,000,000,000 sec = 1 nanosec\\
+\hline
+    fetch from L1 cache memory &	0.5 nanosec\\
+\hline
+branch misprediction &	5 nanosec\\
+\hline
+    fetch from L2 cache memory &	7 nanosec\\
+\hline
+    Mutex lock/unlock &	25 nanosec\\
+\hline
+    fetch from main memory &	100 nanosec\\
+\hline
+    send 2K bytes over 1Gbps network &	20,000 nanosec\\
+    \hline
+    read 1MB sequentially from memory &	250,000 nanosec\\
+\hline
+    fetch from new disk location (seek) &	8,000,000 nanosec\\
+\hline
+    read 1MB sequentially from disk &	20,000,000 nanosec\\
+\hline
+    send packet US to Europe and back &	150 milliseconds = 150,000,000 nanosec\\
+    \hline      
+    % \float
+\end{tabularx}
+    
+\end{center}
+\caption{ \label{tab:1} A Table}
+\end{table}
+\end{center}
+\end{document}
