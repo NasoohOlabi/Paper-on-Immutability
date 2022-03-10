@@ -522,9 +522,21 @@ A snapshot's space referenced property value is the same as the file system's wa
 
 You can identify additional information about how the values of the used property are consumed. New read-only file system properties describe disk space usage for clones, file systems, and volumes.
 
-% https://www.youtube.com/watch?v=lsFDp-W1Ks0
-% last dacade disk size grow almost 8 folds
-% while speed almost doubled
+% https://www.youtube.com/watch?v=lsFDp-W1Ks0 --not immutablility realated
+% last dacade disk size grow almost 8 folds --not immutablility realated
+% while speed almost doubled --not immutablility realated
+
+\subsection{Kafka}
+In order to understand what's kafka and how it levarges immutability in it's archetecture we firest have to understatnd what event streaming is the practice of capturing data in real-time from event sources like databases, sensors, mobile devices, cloud services, and software applications in the form of streams of events; storing these event streams durably for later retrieval; manipulating, processing, and reacting to the event streams in real-time as well as retrospectively; and routing the event streams to different destination technologies as needed. Event streaming thus ensures a continuous flow and interpretation of data so that the right information is at the right place, at the right time.[10]
+
+
+% https://stackoverflow.com/questions/58224758/what-does-it-really-mean-by-kafka-partitions-are-immutable#:~:text=Tha%20Kafka%20partitions%20are%20defined,a%20producer%20point%20of%20view.
+Tha Kafka partitions are defined as "immutable" referring to the fact that a producer can just append messages to a partition itself and not changing the value for an existing one (i.e. with the same key). The partition itself is a commit log working just in append mode from a producer point of view. Of course, it means that without any kind of mechanisms like deletion (by retention time) and compaction, the partition size could grow endlessly. At this point you could think .. "so it's not immutable!" as you mentioned. Well, as I said the immutability is from a producer's point of view. Deletion and compaction are administrative operations. For example, deleting records is also possible using the Admin Client API ... but we are always talking about administrative stuff, not producer/consumer related stuff.
+If you think about compaction and how it works, the producer initially sends, for example, a message with key = A and payload = "Hello". After a while in order to "update" the value, it sends a new message with same key = A and payload = "Hi" ... but actually it's a really new message appended at the end of the partition log; it will be the compaction thread in the broker doing the work of deleting the old message with "Hello" payload leaving just the new one. In the same way a producer can send the message with key = A and payload = null. It's the way for actually deleting the message (null is called "tombstone"). Anyway the producer is still appending a new message to the partition; it's always the compaction thread which will delete the last message with key = A when it saw the tombstone.
+
+
+Apache Kafka is a publish/subscribe messaging system designed to solve this problem. It is often described as a “distributed commit log” or more recently as a “distributing streaming platform.” A filesystem or database commit log is designed to provide a durable record of all transactions so that they can be replayed to consistently build the state of a system. Similarly, data within Kafka is stored durably, in order, and can be read deterministically. In addition, the data can be distributed within the system to provide additional protections against failures, as well as significant opportunities for scaling performance.[9]
+
 
 
 %###############################################
@@ -553,9 +565,11 @@ You can identify additional information about how the values of the used propert
 [4] Norvig, P. (n.d.). Teach yourself programming in ten years. Retrieved March 5, 2022, from \url{http://norvig.com/21-days.html#answers} \newline
 [5] Axelsson, L. (2017). Immutability : An Empirical Study in Scala LUDVIG AXELSSON. \newline 
 [6] Smith, Jonathan \& Jr, Gerald. (1988). Effects of Copy-on-Write Memory Management on the Response Time of UNIX Fork Operations.. Computing Systems. 1. 255-278.
-[7] Levrinc, R. (2008). LLFS : a copy-on-write file system for Linux [Diploma Thesis]. reposiTUm. \url{https://resolver.obvsg.at/urn:nbn:at:at-ubtuw:1-28018}
+[7] Levrinc, R. (2008). LLFS : a copy-on-write file system for Linux [Diploma Thesis]. reposiTUm. \url{https://resolver.obvsg.at/urn:nbn:at:at-ubtuw:1-28018} \newline
 [8] Kernighan, B. W., and Ritchie, D. M. The C Programming Lan-
-guage, Second Edition. Prentice Hall, 1988.
+guage, Second Edition. Prentice Hall, 1988. \newline
+[9] Narkhede, N., Shapira, G., \& Palino, T. (2017). Meet Kafka. In Kafka: Real-time data and stream processing at scale (pp. 3–5). essay, O'Reilly Media, Incorporated. \newline
+[10] Apache Software Foundation. (n.d.). Introduction. Apache Kafka. Retrieved March 10, 2022, from https://kafka.apache.org/intro 
 
 %TODO: talk about referential transparency
 %TODO: use these links:
