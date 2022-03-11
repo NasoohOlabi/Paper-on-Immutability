@@ -1,10 +1,10 @@
 # Fdb version 3
-["biber paper"] 1646906535 "paper.bcf" "paper.bbl" "paper" 1646907417
-  "paper.bcf" 1646907417 106964 517e148195781bc3c3154e52820089fb "pdflatex"
+["biber paper"] 1646928269 "paper.bcf" "paper.bbl" "paper" 1646979840
+  "paper.bcf" 1646979839 106964 517e148195781bc3c3154e52820089fb "pdflatex"
   (generated)
   "paper.bbl"
   "paper.blg"
-["pdflatex"] 1646907411 "c:/Users/nasooh/Desktop/School_is_cool/Term2 Research/MyPaper/paper.tex" "paper.pdf" "paper" 1646907417
+["pdflatex"] 1646979833 "c:/Users/nasooh/Desktop/School_is_cool/Term2 Research/MyPaper/paper.tex" "paper.pdf" "paper" 1646979840
   "C:/Users/nasooh/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1646111225 82684 3a87f55ef758bc5fe6abfed9a40cca26 ""
   "C:/Users/nasooh/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1641734657 9770440 b9760ca41121b925bd6cb0b3208634ad ""
   "C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -151,15 +151,16 @@
   "C:/Users/nasooh/AppData/Local/Programs/MiKTeX/tex/latex/wasysym/uwasy.fd" 1579693002 2296 c50bf1089c7a46a0d4e9a119e980be4e ""
   "C:/Users/nasooh/AppData/Local/Programs/MiKTeX/tex/latex/wasysym/wasysym.sty" 1579693002 11252 7fbfbe7bbcbe1f73acbe32ae2f10c666 ""
   "C:/Users/nasooh/AppData/Local/Programs/MiKTeX/tex/latex/xpatch/xpatch.sty" 1585221260 8510 7803f78066c4f9d008405191a4b43073 ""
-  "c:/Users/nasooh/Desktop/School_is_cool/Term2 Research/MyPaper/paper.tex" 1646907408 38816 c15e2f80a3c8e6d72e0b606994edae1a ""
+  "c:/Users/nasooh/Desktop/School_is_cool/Term2 Research/MyPaper/paper.tex" 1646979826 48312 275ee23c215047a68dc8b5dbc799fb19 ""
   "logo.png" 1645372295 133778 621ea8a8362434072946fb7cbe55da13 ""
   "originalTree.png" 1646482725 12804 b6430e3e2976bb740b510aec811ac7e1 ""
-  "paper.aux" 1646907417 6440 4bbd61e3a5787e11abd9f0107d5c73b9 "pdflatex"
-  "paper.bbl" 1646906568 486 f7f239c736cf01ac6ce7bd829f9b3c7b "biber paper"
-  "paper.out" 1646907417 3275 6cd40e7b63091cedf3484e211c43f174 "pdflatex"
-  "paper.run.xml" 1646907417 2392 84bacd10c483bd35fedbef0e65509d0a "pdflatex"
-  "paper.tex" 1646907408 38816 c15e2f80a3c8e6d72e0b606994edae1a ""
-  "paper.toc" 1646907417 2997 30e9636bcb2c0ecf1aec472a55f04f81 "pdflatex"
+  "paper.aux" 1646979839 8062 6f1d48556ca24467410ced20269d5621 "pdflatex"
+  "paper.bbl" 1646928277 486 f7f239c736cf01ac6ce7bd829f9b3c7b "biber paper"
+  "paper.out" 1646979839 3931 385e4d6fc8223049b3a515492558f287 "pdflatex"
+  "paper.run.xml" 1646979839 2392 84bacd10c483bd35fedbef0e65509d0a "pdflatex"
+  "paper.tex" 1646979826 48312 275ee23c215047a68dc8b5dbc799fb19 ""
+  "paper.toc" 1646979839 3673 ba257bada8a4ee617004b6442ab38672 "pdflatex"
+  "refeq.png" 1646929242 8849 80450ddcc2eee567ab4eb386a1627306 ""
   "structuralSharing.png" 1646480803 32042 fa9eda68ad4545ecb6f774c2a9d9cbae ""
   (generated)
   "paper.aux"

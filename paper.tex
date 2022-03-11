@@ -79,6 +79,11 @@ tabsize=3}
 	\fancyfoot{}}
 	%don't worry about the headers, we will compile them
 
+\fancypagestyle{cluster}{
+    \fancyfoot[L]{\rule[10pt]{430pt}{1pt} \\{} \small (1) Cluster: is a set of computers that work together so that they can be viewed as a single system.\\{} which allows us to scale horizontally with commodity hardware effectively.\\{} \small (2) DOM: Document Object Model.}
+    }
+    
+
 \newcommand{\pref}[1]{(\ref{#1})} % If you use \ref{xx}, the reference in the text appears without parentheses: "as we see in 1, ..." instead of "as we see in (1)...". So we create a new command: instead of \ref, call \pref (Parentheses REFerence) which specifies that any cross references to xx appear in parentheses.
 
 \usepackage{tipa} %for IPA
@@ -120,7 +125,7 @@ tabsize=3}
 
 \begin{document}
 
-\pagenumbering{roman}
+\pagenumbering{Roman}
 
 \begin{figure}
     {\includegraphics[scale=.25]{logo.png}}
@@ -160,19 +165,19 @@ tabsize=3}
 	\line(1,0){430}
 \end{center}
 
-%\begin{center}
-%	\textbf{Table of Contents}
-%\end{center}
+% \begin{center}
+% 	\textbf{Table of Contents}
+% \end{center}
 
-%\begin{large}
-%\begin{center}
-	%\begin{tabular}{c c}
-%		1. Section 1 & 4. Section 4\\
-%		2. Section 2 & 5. Section 5\\
-%		3. Section 3 & 6. Section 6
-%	\end{tabular}
-%\end{center}
-%\end{large}
+% \begin{large}
+% \begin{center}
+% 	\begin{tabular}{c c}
+% 		1. Section 1 & 4. Section 4\\
+% 		2. Section 2 & 5. Section 5\\
+% 		3. Section 3 & 6. Section 6
+% 	\end{tabular}
+% \end{center}
+% \end{large}
 
 \newpage
 \tableofcontents
@@ -181,6 +186,7 @@ tabsize=3}
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
+\newpage
 \section{Introduction}
 % immutability an empircal study in scala
 Unintended mutations of a program’s state cause inconsistent behavior and bugs of the
@@ -194,6 +200,7 @@ and instead of mutating shared data in memory, data would have to be re-created 
 needed. Programmers can then safely share data without the possibility of having it mutate to
 something else, which is crucial to avoid, for example, race conditions in concurrent programs.
 
+\newpage
 \section{State Management}
 % https://medium.com/super-declarative/understanding-state-management-and-why-you-never-will-dd84b624d0e
 The term state management has gain traction over the last decade or so with the emergence of wide spread IT solutions and the ease of making one of your own from whatever background you come from. Depending on the underlying scenario the term could stand for:
@@ -292,6 +299,7 @@ As you can see disk fetches can take 100x more than main memory fetches. And whe
 
 
 %this format problems tech solutions
+\newpage
 \section{Immutability}
 
 
@@ -361,6 +369,7 @@ multiple threads access the same data at the same time and have synchronization 
 \subsubsection{Modularity} Without depending on a local or global state, immutable types and data may be reused
 in different contexts more easily.
 
+\newpage
 \section{Methods}
 
 \subsection{Shadowing}
@@ -494,6 +503,7 @@ swap space required, reduces the amount of time spent swapping, increases the nu
 without paging, and decreases the cost of context switches.[6]
 
 
+\newpage
 \section{Solutions}
 % me<<<
 % Incorporating Immutability as a key architectural concept throughout memory layers in a system is
@@ -527,7 +537,15 @@ You can identify additional information about how the values of the used propert
 % while speed almost doubled --not immutablility realated
 
 \subsection{Kafka}
-In order to understand what's kafka and how it levarges immutability in it's archetecture we firest have to understatnd what event streaming is the practice of capturing data in real-time from event sources like databases, sensors, mobile devices, cloud services, and software applications in the form of streams of events; storing these event streams durably for later retrieval; manipulating, processing, and reacting to the event streams in real-time as well as retrospectively; and routing the event streams to different destination technologies as needed. Event streaming thus ensures a continuous flow and interpretation of data so that the right information is at the right place, at the right time.[10]
+Apache Kafka® is an event streaming platform. And in order to understand what it does and how it leverages immutability in it's architecture we first have to understand what event streaming is. In short, it's the practice of capturing data in real-time from event sources like databases, sensors, mobile devices, cloud services, and software applications in the form of streams of events; storing these event streams durably for later retrieval; manipulating, processing, and reacting to the event streams in real-time as well as retrospectively; and routing the event streams to different destination technologies as needed. Event streaming thus ensures a continuous flow and interpretation of data so that the right information is at the right place, at the right time.[10]
+
+
+Kafka relies on a publish/subscribe messaging system. It is often described as a “distributed commit log” or more recently as a “distributing streaming platform.” A filesystem or database commit log is designed to provide a durable record of all transactions so that they can be replayed to consistently build the state of a system. Similarly, data within Kafka is stored durably, in order, and can be read deterministically. In addition, the data can be distributed within the system to provide additional protections against failures, as well as significant opportunities for scaling performance.[9]
+
+% https://developer.confluent.io/learn-kafka/apache-kafka/partitions/#:~:text=Kafka%20Partitioning&text=Partitioning%20takes%20the%20single%20topic,many%20nodes%20in%20the%20cluster.
+Part of what makes Kafka scale so well is that It gives us the ability to partition topics. Partitioning takes the single topic log and breaks it into multiple logs, each of which can live on a separate node in the Kafka cluster\textsuperscript{1}. This way, the work of storing messages, writing new messages, and processing existing messages can be split among many nodes in the cluster.
+
+\thispagestyle{cluster}
 
 
 % https://stackoverflow.com/questions/58224758/what-does-it-really-mean-by-kafka-partitions-are-immutable#:~:text=Tha%20Kafka%20partitions%20are%20defined,a%20producer%20point%20of%20view.
@@ -535,30 +553,73 @@ Tha Kafka partitions are defined as "immutable" referring to the fact that a pro
 If you think about compaction and how it works, the producer initially sends, for example, a message with key = A and payload = "Hello". After a while in order to "update" the value, it sends a new message with same key = A and payload = "Hi" ... but actually it's a really new message appended at the end of the partition log; it will be the compaction thread in the broker doing the work of deleting the old message with "Hello" payload leaving just the new one. In the same way a producer can send the message with key = A and payload = null. It's the way for actually deleting the message (null is called "tombstone"). Anyway the producer is still appending a new message to the partition; it's always the compaction thread which will delete the last message with key = A when it saw the tombstone.
 
 
-Apache Kafka is a publish/subscribe messaging system designed to solve this problem. It is often described as a “distributed commit log” or more recently as a “distributing streaming platform.” A filesystem or database commit log is designed to provide a durable record of all transactions so that they can be replayed to consistently build the state of a system. Similarly, data within Kafka is stored durably, in order, and can be read deterministically. In addition, the data can be distributed within the system to provide additional protections against failures, as well as significant opportunities for scaling performance.[9]
+\subsection{Elm}
+
+A delightful language
+for reliable web applications[11].
+Elm uses The Model-Viewer-Controller (MVC) which is a dominant paradigm for application development. However Elm has an added bonus of Models being immutable. 
+\subsubsection{Introduction}
+% https://www.sitepoint.com/functional-reactive-programming-elm-introduction/
+% \subsubsection{Describe State Instead of Transforming the DOM}
+% Not long ago we were building applications by mutating the DOM manually (e.g. using jQuery). As our application grows we introduce more states. Having to code the transformations between all of them exponentially grows the complexity of our application making it harder to maintain.
 
 
+In web development it's quite common to describe state changes by mutating the DOM\textsuperscript{2} manually. And because of that as the application  grows the transformations we write would grow exponentially with it, making the code harder and harder to maintain. Instead of that, modern libraries have popularized the notion of focusing on describing a particular DOM state and then let the library handle the DOM transformations for us. We only focus on describing the discreet DOM states and not how we get there. This leads to substantially less code to write and maintain.
 
-%###############################################
-%############# Must Use Resource ###############
-%###############################################
+% \subsubsection{Events and Data Transformation}
+When it comes to application state, the common thing to do was to mutate the state ourselves e.g. adding comments to an array.
+Instead of doing this we can only describe how the application state needs to change based on events, and let something else apply those transformations for us.
+
+The benefit of doing this is that we can write ‘pure’ functions to describe these transformations. These functions are easier to understand and test. An added benefit is that we can control where our application state is changed, thus making our applications more maintainable. Another benefit is that our views don’t need to know how to mutate state, they only need to know what events to dispatch.
+
+% \subsubsection{Unidirectional Data Flow}
+% Another interesting trend is having all our application events flow in a unidirectional way. Instead of allowing any component talk to any other component, we send message through a central message pipeline. This centralized pipeline applies the transformations we want and broadcasts the changes to all the parts of our application. Flux is an example of this.
+
+% By doing this we gain more visibility of all interactions that happen in our application.
+
+% \subsubsection{Immutable Data}
+Mutable data makes it very hard to restrict where it can be changed, as any component with access to it could add or remove something. This leads to unpredictability, as state could change anywhere.
+
+By using immutable data we can avoid this, by tightly controlling where application state is changed. Combining immutable data with functions that describe the transformations gives us a very robust workflow, and immutable data helps us enforce the unidirectional flow by not letting us change state in unexpected places.
+% \subsubsection{Centralized State}
+
+It's a known fact that Centralized State specifically Global variables are an indication of hard to maintain code. However Having an Immutable Central State is quite different. The use of a centralized ‘atom’ for keeping all state. Meaning that we put all state in one big tree instead of having it scattered across components has become a trend in web development.
+In a typical application we usually have global application state (e.g. a collection of users) and component specific state (e.g. the visibility state of a particular component). It is controversial whether storing both kinds of state in one place is beneficial or not. But at least keeping all application state in one place has a big benefit, which is providing a consistent state across all components in our application.
+\subsubsection{Where Elm Shines}
+elm-html -the part of Elm which render(produce) the corresponding html code to what you write in Elm- are based on the virtual-dom project, which is responsible for the great performance. 
+This library is based on the idea of a “virtual DOM”. Rather than touching the DOM directly, we build an abstract version of it on each frame. We use the node function to create a cheap representation of what we want. Virtual DOM sounds pretty slow, right? Create a whole new scene on every frame? This technique is actually widely used in the game industry and performs shockingly well for DOM updates when you use two relatively simple techniques: diffing and laziness.
+
+Diffing to figure out how the DOM needs to be modified. Diffing means taking the current virtual DOM and the new virtual DOM and looking for changes. It sounds kind of fancy at first, but it is a very simple process. We first make a big list of all the differences, like if someone has changed the color of a particular part of the screen or added an entirely new one. After all of the differences are found, we use them as instructions for modifying the DOM in one big batch. This means we do the dirty work of modifying the DOM and making sure everything is fast. You can focus on writing code that is easy to understand and maintain.
+This approach created a clear path to fully supporting HTML in a way that is perfect for Elm! Even better, Elm already has great facilities for purity and immutability, which are vital for optimizations that make diffing way faster.
+Being lazy about diffing can lead to great performance improvements, especially if you have immutable data. For example, let’s say we are rendering a list of tasks:
+
+But we may know that on many updates, none of the tasks are changing. And if no task changes, the view must not be changing either. This is a perfect time to be lazy:
+Instead of calling the todoList function on every frame, we check to see if state.tasks has changed since last frame. If not, we can skip everything. No need to call the function, do any diffing, or touch the DOM at all! This optimization is safe in Elm because functions are pure and data is immutable.
+Purity means that the todoList function will always have the same output given the same input. So if we know state.tasks is the same, we can skip todoList entirely.
+Immutability makes it cheap to figure out when things are “the same”. Immutability guarantees that if two things are referentially equal, they must be structurally equal.
+So we just check to see if todoList and state.tasks are the same as last frame by comparing the old and new values by reference. This is super cheap, and if they are the same, the lazy function can often avoid a ton of work. This is a pretty simple trick that can speed things up significantly.
+\begin{figure}[H]
+    \begin{center}
+        {\includegraphics[scale=0.55]{refeq.png}}
+       \end{center}
+       \caption{ \label{figure:3} A new Task was added to state.tasks and according to what we learn from a previous section about structural sharing we know the before and after the add operations our lists would look like this.}
+\end{figure}
+If you have been following Elm, you may begin to see a pattern: purity and immutability are kind of a big deal.
+
+Performance is a good hook, but the real benefit is that this approach leads to code that is easier to understand and maintain. In short, it becomes very simple to create reusable HTML widgets and abstract out common patterns. This is why people with larger code bases should be interested in virtual DOM approaches.
+
+\subsection{Spark}
+Apache Spark is a powerful open-source processing engine built around speed, ease of use, and sophisticated analytics. Spark runs programs up to 100x faster than Hadoop MapReduce in memory, or 10x faster on disk. It can be used to build data applications as a library, or to perform ad-hoc data analysis interactively. Spark powers a stack of libraries including SQL, DataFrames, and Datasets, MLlib for machine learning, GraphX for graph processing, and Spark Streaming. You can combine these libraries seamlessly in the same application. As well, Spark runs on a laptop, Hadoop, Apache Mesos, standalone, or in the cloud. It can access diverse data sources including HDFS, Apache Cassandra, Apache HBase, and S3.
 % Another huge advantage lazy evaluation gives us is the ability to use DAGs to optimize complex and large jobs
 % https://techvidvan.com/tutorials/apache-spark-dag-directed-acyclic-graph/
 
 
-% \subsection{Structural Sharing}
-% \subsection{Cpp example}
-% $https://www.youtube.com/watch?v=y_m0ce1rzRI\&t=4081s$
-% \subsection{Copy-On-Write}
-% \subsection{logfilesystem}
-% \subsection{Append Logs}%not important
-% effecient cow reduce the overhead of threading and parallel processing
-% sth
-% \subsection{MVC}
-% \subsection{elm}
-% sth
 % https://www.citationmachine.net/bibliographies/aefbbb90-00f3-449b-b369-1148cb3d2bb0
-\section*{References}
+
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\section{References}
 [1] Berman, J. J. (2018). Immutability and Immortality. In Principles and practice of big data: Preparing, sharing, and analyzing complex information (pp. 80–85). essay, Academic Press. \newline
 [2] Trcka, Nikola \& Aalst, Wil \& Sidorova, Natalia. (2009). Data-Flow Anti-patterns: Discovering Data-Flow Errors in Workflows. Proceedings of the International Conference on Advanced Information Systems Engineering (CAiSE). 5565. 425-439. 10.1007/978-3-642-02144-2_34. \newline
 [3] Solarwinds: Top 4 Causes Of Storage I/O Bottlenecks \& How To Mitigate Them \newline
@@ -570,14 +631,49 @@ Apache Kafka is a publish/subscribe messaging system designed to solve this prob
 guage, Second Edition. Prentice Hall, 1988. \newline
 [9] Narkhede, N., Shapira, G., \& Palino, T. (2017). Meet Kafka. In Kafka: Real-time data and stream processing at scale (pp. 3–5). essay, O'Reilly Media, Incorporated. \newline
 [10] Apache Software Foundation. (n.d.). Introduction. Apache Kafka. Retrieved March 10, 2022, from https://kafka.apache.org/intro 
+[11]  (n.d.). Retrieved March 11, 2022, from https://elm-lang.org/ 
 
+
+
+
+
+
+
+\newpage
+\section{Acknowledgements}
+Thank you for your time
+
+\printbibliography
+
+
+\end{document}
+
+
+
+
+%###############################################
+
+
+%############# Must Use Resource ###############
+%###############################################
+% \subsection{Structural Sharing}
+% \subsection{Cpp example}
+% $https://www.youtube.com/watch?v=y_m0ce1rzRI\&t=4081s$
+% \subsection{Copy-On-Write}
+% \subsection{logfilesystem}
+% \subsection{Append Logs}%not important
+% effecient cow reduce the overhead of threading and parallel processing
+% sth
+% \subsection{MVC}
+% \subsection{elm}
+% sth
+%TODO: https://elm-lang.org/news/blazing-fast-html
 %TODO: talk about referential transparency
 %TODO: use these links:
 %TODO: http://typeocaml.com/2015/01/02/immutable/
 %TODO: https://algs4.cs.princeton.edu/23quicksort/
 %TODO: https://coderscat.com/quicksort-history-and-impls/
 %TODO: https://www.codingninjas.com/blog/2020/09/26/mutating-non-mutating-algorithms-in-c/
-%TODO: https://elm-lang.org/news/blazing-fast-html
 %TODO: https://discourse.elm-lang.org/t/can-the-compiler-skip-virtual-dom/6300
 %TODO: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3136027/
 %TODO: https://en.wikipedia.org/wiki/Persistent_data_structure#Garbage_collection
@@ -595,8 +691,6 @@ guage, Second Edition. Prentice Hall, 1988. \newline
 % lazyness
 % transperncy substitiustion model
 % GC or static refs
-
-
 % chanllenging
 % modularity
 % time travelling debugger
@@ -606,12 +700,3 @@ guage, Second Edition. Prentice Hall, 1988. \newline
 % modernday statless deployment
 % 	docker or distributed or actor
 % 	strong endpoint devices
-
-
-\section*{Acknowledgements}
-Thank you for your time
-
-\printbibliography
-
-
-\end{document}
