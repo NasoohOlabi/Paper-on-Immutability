@@ -987,6 +987,13 @@ INPUT .\refeq.png
 INPUT .\refeq.png
 INPUT .\refeq.png
 INPUT .\refeq.png
+INPUT .\wordcount.png
+INPUT .\wordcount.png
+INPUT wordcount.png
+INPUT .\wordcount.png
+INPUT .\wordcount.png
+INPUT .\wordcount.png
+INPUT .\wordcount.png
 INPUT paper.aux
 INPUT .\paper.out
 INPUT .\paper.out
@@ -995,6 +1002,8 @@ OUTPUT paper.run.xml
 INPUT C:\Users\nasooh\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\base\8r.enc
 INPUT C:\Users\nasooh\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
 INPUT C:\Users\nasooh\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
+INPUT C:\Users\nasooh\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
+INPUT C:\Users\nasooh\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
 INPUT C:\Users\nasooh\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Users\nasooh\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Users\nasooh\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb

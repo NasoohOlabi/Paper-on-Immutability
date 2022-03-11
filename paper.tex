@@ -512,7 +512,7 @@ without paging, and decreases the cost of context switches.[6]
 % The trend to leverage immutability in new designs is so pervasive we see it in a number of hardware areas. We first examine the implementation of SSDs, then some new trends in hard disks
 
 % mix<<<
-The trend to leverage immutability as a key architectural concept in new designs is so pervasive we see it in a number of new technologies and open source systems, we'll go through the same four areas of state management and see flagship technologies that leverage immutability in some of their features:
+The trend to leverage immutability as a key architectural concept in new designs is so pervasive we see it in a number of new technologies and open source projects, we'll go through the same four areas of state management and see flagship technologies that leverage immutability in some of their features:
 
 \subsection{Copy-on-Write File Systems}
 % COW based file Systems pdf
@@ -609,7 +609,42 @@ If you have been following Elm, you may begin to see a pattern: purity and immut
 Performance is a good hook, but the real benefit is that this approach leads to code that is easier to understand and maintain. In short, it becomes very simple to create reusable HTML widgets and abstract out common patterns. This is why people with larger code bases should be interested in virtual DOM approaches.
 
 \subsection{Spark}
-Apache Spark is a powerful open-source processing engine built around speed, ease of use, and sophisticated analytics. Spark runs programs up to 100x faster than Hadoop MapReduce in memory, or 10x faster on disk. It can be used to build data applications as a library, or to perform ad-hoc data analysis interactively. Spark powers a stack of libraries including SQL, DataFrames, and Datasets, MLlib for machine learning, GraphX for graph processing, and Spark Streaming. You can combine these libraries seamlessly in the same application. As well, Spark runs on a laptop, Hadoop, Apache Mesos, standalone, or in the cloud. It can access diverse data sources including HDFS, Apache Cassandra, Apache HBase, and S3.
+% https://databricks.com/blog/2016/06/22/apache-spark-key-terms-explained.html#:~:text=1.,or%2010x%20faster%20on%20disk.
+Apache Spark is a powerful open-source processing engine built around speed, ease of use, and sophisticated analytics. Spark runs programs up to 100x faster than Hadoop MapReduce in memory, or 10x faster on disk -remember the speed differences between persistent storage and main memory-. It can run on a laptop or cluster and It can access diverse data sources to perform 
+%https://www.quora.com/In-layman%E2%80%99s-terms-what-is-Apache-Spark
+distributed computing tasks with built-in fault tolerance up to some level that allows for these computations that might otherwise take much longer to process using a single machine.
+The key advantage of Spark for a user is its simple data abstraction of Resilient Distributed Dataset (RDD), that hides data partitioning and distributed computation on that data.
+
+When it comes explaining the core concepts of Spark there isn't a better example than a simple word count application:
+Assume you have a GigaByte text file of english literature and you want to count the frequency of occurrences for each word in that file. Doing it the spark way you split up the problem into several tasks each one resulting in a different rdd... here's how it goes\dots
+% https://www.edureka.co/community/11986/don-understand-the-reason-behind-spark-rdd-being-immutable#:~:text=RDDs%20are%20not%20just%20immutable,making%20data%20from%20other%20data.
+\begin{lstlisting}
+        val lines = sc.textFile(**file path**)
+        val words = lines.flatMap(line => line.split(" "))
+        val numbered_words = words.map(word => (word, 1))
+        val wordsFrequencies.reduceByKey(_ + _)
+\end{lstlisting}
+Spark breaks the previous code up to tasks. and represent each rdd along the way only by the recipe for generating it. i.e. words, numbered_words, wordsFrequencies would not take any more space than the space taken by the transforming function. in the case of words Spark only stores that (words is the result of flatMap on lines using the function $x => x.split("\quad")$). In Spark Terminology flatMap is considered a transformation.\newline Transformations are Lazy and won't trigger any kind of computation. 
+\begin{figure}[H]
+    \begin{center}
+        {\includegraphics[scale=.4]{wordcount.png}}
+    \end{center}
+    \caption{ \label{figure:4} A Directed Acyclic Graph (DAG) representing the above code in a cluster of 2 nodes}
+\end{figure}
+
+RDDs are not just immutable but a deterministic (pure) function of their input. That means RDD can be recreated at any time.This helps in taking advantage of caching, sharing and replication. RDD isn't really a collection of data, but just a recipe for making data from other data. Immutability rules out a big set of potential problems due to updates from multiple threads at once. Immutable data is definitely safe to share across processes. Immutable data can as easily live in memory as on disk. This makes it reasonable to easily move operations that hit disk to instead use data in memory, and again, adding memory is much easier than adding I/O bandwidth. RDD significant design wins, at cost of having to copy data rather than mutate it in place. Generally, that's a decent tradeoff to make: gaining the fault tolerance and correctness with no developer effort worth spending disk memory and CPU on.
+
+Also Note that (flatMap, map, reduceByKey) are all transformations and all of the above code wouldn't trigger any computation unless we call what Spark describe as an Actions.\newline
+Actions include (collect, take, \dots). for example, calling .take(10) on lines would give us the first 10 lines and calling .collect() on wordsFrequencies would give us a (key,value) map (sometimes called dictionary, object, hashmap) that would reside in the Main Memory of the machine that ran the collect method.
+
+Note that Shuffling is necessary in the case of reduceByKey since we are counting the words occurrences on the file level and thus we need to sum up occurrences of each word in each partition.
+
+As we saw Spark power resides in it's core abstraction\dots RDDs which are immutable, lazy and deterministic, which makes them thread safe, distributed, And allows us to perform DAG based optimizations which reduce the amount of communication between nodes over the network which is a huge cause for latency.
+
+
+\section{Conclusions}
+We saw the advantages of leveraging immutability as a key architectural concept in designs of a number of new technologies and open source projects. And how contrary to popular believe that immutability cases a performance overhead and waste in memory. implementation of immutability on multiple fields of state management prove otherwise and that immutability will eventually leads to better performance and broader horizons were we can achieve what was considered impossible in a matter of minutes (in the case of Spark).
+
 % Another huge advantage lazy evaluation gives us is the ability to use DAGs to optimize complex and large jobs
 % https://techvidvan.com/tutorials/apache-spark-dag-directed-acyclic-graph/
 
@@ -695,7 +730,7 @@ Thank you for your time
 % modularity
 % time travelling debugger
 % bref on 
-% determenistic concurrency
+% deterministic concurrency
 % reactiveity
 % modernday statless deployment
 % 	docker or distributed or actor

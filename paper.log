@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.9)  11 MAR 2022 08:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.9)  11 MAR 2022 12:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -824,7 +824,7 @@ Package biblatex Info: ... file 'paper.bbl' found.
 Package biblatex Info: Reference section=0 on input line 126.
 Package biblatex Info: Reference segment=0 on input line 126.
 \c@lstlisting=\count439
-<logo.png, id=127, 372.64218pt x 367.3725pt>
+<logo.png, id=131, 372.64218pt x 367.3725pt>
 File: logo.png Graphic file (type png)
 <use logo.png>
 Package pdftex.def Info: logo.png  used on input line 131.
@@ -944,12 +944,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [7]
-<originalTree.png, id=253, 349.305pt x 326.21875pt>
+<originalTree.png, id=258, 349.305pt x 326.21875pt>
 File: originalTree.png Graphic file (type png)
 <use originalTree.png>
 Package pdftex.def Info: originalTree.png  used on input line 488.
 (pdftex.def)             Requested size: 227.04555pt x 212.03966pt.
-<structuralSharing.png, id=254, 439.6425pt x 416.55624pt>
+<structuralSharing.png, id=259, 439.6425pt x 416.55624pt>
 File: structuralSharing.png Graphic file (type png)
 <use structuralSharing.png>
 Package pdftex.def Info: structuralSharing.png  used on input line 495.
@@ -1000,7 +1000,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [12]
-<refeq.png, id=292, 754.31813pt x 321.45094pt>
+<refeq.png, id=297, 754.31813pt x 321.45094pt>
 File: refeq.png Graphic file (type png)
 <use refeq.png>
 Package pdftex.def Info: refeq.png  used on input line 603.
@@ -1017,6 +1017,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [13 <./refeq.png>]
+<wordcount.png, id=304, 963.6pt x 542.025pt>
+File: wordcount.png Graphic file (type png)
+<use wordcount.png>
+Package pdftex.def Info: wordcount.png  used on input line 630.
+(pdftex.def)             Requested size: 385.43317pt x 216.80615pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1024,7 +1030,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[14]
+[14 <./wordcount.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[15]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1036,10 +1050,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.642 \newpage
+l.677 \newpage
                [1]
 
-LaTeX Warning: Empty bibliography on input line 646.
+LaTeX Warning: Empty bibliography on input line 681.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1052,26 +1066,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.II}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.649 \end{document}
+l.684 \end{document}
                      [2] (paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 385E4D6FC8223049B3A515492558F287;3931.
+(rerunfilecheck)             Checksum: ABEFCCF309A0F5FEE33DBC61B9EE4DEF;4030.
 Package logreq Info: Writing requests to 'paper.run.xml'.
 \openout1 = `paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 21209 strings out of 478659
- 358204 string characters out of 2845447
- 1121524 words of memory out of 3000000
- 38895 multiletter control sequences out of 15000+600000
+ 21256 strings out of 478659
+ 358783 string characters out of 2845447
+ 1121629 words of memory out of 3000000
+ 38933 multiletter control sequences out of 15000+600000
  422989 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,69p,1214b,1865s stack positions out of 5000i,500n,10000p,200000b,80000s
-{C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (18 pages, 329917 bytes).
+{C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (19 pages, 376160 bytes).
 PDF statistics:
- 374 PDF objects out of 1000 (max. 8388607)
- 109 named destinations out of 1000 (max. 500000)
- 269 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 398 PDF objects out of 1000 (max. 8388607)
+ 117 named destinations out of 1000 (max. 500000)
+ 282 words of extra memory for PDF output out of 10000 (max. 10000000)
 
