@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.9)  13 MAR 2022 18:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.1.9)  13 MAR 2022 19:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -853,6 +853,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [1{C:/Users/nasooh/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
 
  <./logo.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 155--162
+
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -900,7 +904,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [3]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 317.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 318.
  (C:\Users\nasooh\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
@@ -920,12 +924,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [5]
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 420.
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 421.
  (C:\Users\nasooh\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 420.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 421.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -955,12 +959,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <originalTree.png, id=262, 349.305pt x 326.21875pt>
 File: originalTree.png Graphic file (type png)
 <use originalTree.png>
-Package pdftex.def Info: originalTree.png  used on input line 494.
+Package pdftex.def Info: originalTree.png  used on input line 495.
 (pdftex.def)             Requested size: 227.04555pt x 212.03966pt.
 <structuralSharing.png, id=263, 439.6425pt x 416.55624pt>
 File: structuralSharing.png Graphic file (type png)
 <use structuralSharing.png>
-Package pdftex.def Info: structuralSharing.png  used on input line 501.
+Package pdftex.def Info: structuralSharing.png  used on input line 502.
 (pdftex.def)             Requested size: 263.78752pt x 249.93567pt.
 
 
@@ -1011,7 +1015,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <refeq.png, id=301, 754.31813pt x 321.45094pt>
 File: refeq.png Graphic file (type png)
 <use refeq.png>
-Package pdftex.def Info: refeq.png  used on input line 609.
+Package pdftex.def Info: refeq.png  used on input line 610.
 (pdftex.def)             Requested size: 414.87627pt x 176.79855pt.
 
 Underfull \vbox (badness 4543) has occurred while \output is active []
@@ -1028,7 +1032,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <wordcount.png, id=308, 963.6pt x 542.025pt>
 File: wordcount.png Graphic file (type png)
 <use wordcount.png>
-Package pdftex.def Info: wordcount.png  used on input line 636.
+Package pdftex.def Info: wordcount.png  used on input line 637.
 (pdftex.def)             Requested size: 385.43317pt x 216.80615pt.
 
 
@@ -1058,10 +1062,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.I}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.683 \newpage
+l.684 \newpage
                [1]
 
-LaTeX Warning: Empty bibliography on input line 687.
+LaTeX Warning: Empty bibliography on input line 688.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1074,7 +1078,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.II}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.690 \end{document}
+l.691 \end{document}
                      [2] (paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 962DF28C06214156CD72723BF97E2B31;4030.
@@ -1085,13 +1089,13 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 Here is how much of TeX's memory you used:
  21257 strings out of 478659
  358791 string characters out of 2845447
- 1121788 words of memory out of 3000000
+ 1122788 words of memory out of 3000000
  38933 multiletter control sequences out of 15000+600000
  422989 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,69p,1214b,1865s stack positions out of 5000i,500n,10000p,200000b,80000s
 {C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/nasooh/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (20 pages, 376628 bytes).
+Output written on paper.pdf (20 pages, 376754 bytes).
 PDF statistics:
  402 PDF objects out of 1000 (max. 8388607)
  118 named destinations out of 1000 (max. 500000)

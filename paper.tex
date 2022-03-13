@@ -153,11 +153,12 @@ tabsize=3}
 \vspace{1.5cm}
 \newpage
 \noindent \textbf{Abstract}
-\begin{center}
- 	\line(1,0){430}
-\end{center}
-\vspace{-0,3cm}
-\noindent Growing demand for fault-tolerant, scalable, distributed systems has made some mainstream software architectures and patterns obsolete or rather harder to come by, Thus came the rise of stateless and functional solutions based on data immutability which has already been the cornerstone of Big Data [1]. We'll take a look at what immutability looks like in a system and what positive outcomes 
+\newline\newline
+% \begin{center}
+%  	\line(1,0){430}
+% \end{center}
+% \vspace{-0,3cm}
+\noindent Growing demand for fault-tolerant, scalable, distributed systems has made some mainstream software architectures and patterns obsolete or rather harder to come by, Thus came the rise of stateless and functional solutions based on data immutability which has already been the cornerstone of Big Data [1]. We'll take a deep look at immutability and how it should look like in a system, then we will view four emerging technologies that implement immutability in some form and how it made them standout in the industry.
 
 \vspace{5mm}
 
@@ -649,7 +650,7 @@ As we saw Spark power resides in it's core abstraction\dots RDDs which are immut
 
 
 \section{Conclusions}
-We saw the advantages of leveraging immutability as a key architectural concept in designs of a number of new technologies and open source projects. And how contrary to popular believe that immutability cases a performance overhead and waste in memory. implementation of immutability on multiple fields of state management prove otherwise and that immutability will eventually leads to better performance and broader horizons were we can achieve what was considered impossible in a matter of minutes (in the case of Spark).
+We saw the advantages of leveraging immutability as a key architectural concept in designs of a number of new technologies and open source projects. And how contrary to popular believe that immutability introduces a performance overhead and wastes memory. implementation of immutability in multiple fields of state management prove otherwise and that immutability will eventually leads to better performance and broader horizons were we can achieve what was considered impossible in a matter of minutes (in the case of Spark).
 
 % Another huge advantage lazy evaluation gives us is the ability to use DAGs to optimize complex and large jobs
 % https://techvidvan.com/tutorials/apache-spark-dag-directed-acyclic-graph/
