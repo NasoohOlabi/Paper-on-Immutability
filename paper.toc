@@ -61,5 +61,3 @@
 \contentsline {section}{\numberline {6}Conclusions}{15}{section.6}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7}References}{I}{section.7}%
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8}Acknowledgements}{II}{section.8}%
